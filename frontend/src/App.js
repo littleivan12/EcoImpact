@@ -5,18 +5,24 @@ import "./App.css";
 
 function Home() {
   return (
-    <div className="home-container">
-      <Link to="/air" className="section air-section">
-        <FaCloud className="section-icon" />
-        <span className="section-title">Air</span>
+    <div className="h-screen flex">
+      <Link
+        to="/air"
+        className="bg-yellow-200 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-yellow-300 transition"
+      >
+        Air
       </Link>
-      <Link to="/water" className="section water-section">
-        <FaWater className="section-icon" />
-        <span className="section-title">Water</span>
+      <Link
+        to="/water"
+        className="bg-blue-500 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-blue-600 transition text-white"
+      >
+        Water
       </Link>
-      <Link to="/ground" className="section ground-section">
-        <FaTree className="section-icon" />
-        <span className="section-title">Ground</span>
+      <Link
+        to="/ground"
+        className="bg-green-400 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-green-500 transition text-white"
+      >
+        Ground
       </Link>
     </div>
   );
