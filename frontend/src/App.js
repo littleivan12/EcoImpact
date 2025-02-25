@@ -1,55 +1,109 @@
-import React, { useEffect, useState, useRef } from "react";
-import * as d3 from "d3";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { FaCloud, FaWater, FaTree, FaMapMarkedAlt, FaSnowflake, FaRecycle, FaTrash } from "react-icons/fa";
+import "./App.css";
+
+function Home() {
+  return (
+    <div className="home-container">
+      <Link to="/air" className="section air-section">
+        <FaCloud className="section-icon" />
+        <span className="section-title">Air</span>
+      </Link>
+      <Link to="/water" className="section water-section">
+        <FaWater className="section-icon" />
+        <span className="section-title">Water</span>
+      </Link>
+      <Link to="/ground" className="section ground-section">
+        <FaTree className="section-icon" />
+        <span className="section-title">Ground</span>
+      </Link>
+    </div>
+  );
+}
+
+function Air() {
+  return (
+    <div className="page-container air-bg">
+      <h1 className="page-title">This is the state of our Air</h1>
+      <div className="card-container">
+        <div className="info-card clickable-card">
+          <h2>Company V. You</h2>
+          <div className="fight-box">FIGHT ⚡🔥</div>
+          <p>⚡💨 Emissions vs. Your Actions 💨⚡</p>
+        </div>
+        <div className="info-card clickable-card">
+          <h3 className="card-title">Map the Emissions 🌎</h3>
+          <FaMapMarkedAlt className="map-icon" />
+          <p className="coming-soon">(Coming Soon)</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Water() {
+  return (
+    <div className="page-container water-bg-updated">
+      <h1 className="page-title">Water</h1>
+      <div className="card-container">
+        <div className="info-card clickable-card">
+          <h3 className="card-title">Ice? Sheet!</h3>
+          <FaSnowflake className="map-icon" />
+          <p className="page-description">
+            Visualize the effect of ice sheets melting on sea levels. Interactive animations coming soon.
+          </p>
+          <p className="coming-soon">(Coming Soon)</p>
+        </div>
+        <div className="info-card clickable-card">
+          <h3 className="card-title">Water Pollution Insights</h3>
+          <FaWater className="map-icon" />
+          <p className="page-description">
+            Explore ocean contamination rates, ecosystem impacts, and clean water access data.
+          </p>
+          <p className="coming-soon">(Coming Soon)</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Ground() {
+  return (
+    <div className="page-container ground-bg-updated">
+      <h1 className="page-title">Ground</h1>
+      <div className="card-container">
+        <div className="info-card clickable-card">
+          <h3 className="card-title">Stick Around?</h3>
+          <FaTrash className="map-icon" />
+          <p className="page-description">
+            Discover how long common items last before degrading back into the environment.
+          </p>
+          <p className="coming-soon">(Coming Soon)</p>
+        </div>
+        <div className="info-card clickable-card">
+          <h3 className="card-title">Soil Health & Degradation</h3>
+          <FaRecycle className="map-icon" />
+          <p className="page-description">
+            Learn about the impact of land-use changes and deforestation on soil health.
+          </p>
+          <p className="coming-soon">(Coming Soon)</p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function App() {
-  const [data, setData] = useState([]);
-  const chartRef = useRef();
-
-  useEffect(() => {
-    // Fetch Data from FastAPI (Ensure FastAPI is running)
-    fetch("http://127.0.0.1:8000/some-endpoint")
-      .then(response => response.json())
-      .then(data => {
-        setData(data);
-        drawChart(data);
-      })
-      .catch(error => console.error("Error fetching data:", error));
-  }, []);
-
-  const drawChart = (data) => {
-    if (!data || data.length === 0) return;
-
-    const svg = d3.select(chartRef.current)
-      .attr("width", 500)
-      .attr("height", 300);
-
-    svg.selectAll("*").remove(); // Clear previous chart
-
-    const xScale = d3.scaleBand()
-      .domain(data.map(d => d.name)) // Modify as per data format
-      .range([0, 500])
-      .padding(0.3);
-
-    const yScale = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.value)]) // Modify as per data format
-      .range([300, 0]);
-
-    svg.selectAll(".bar")
-      .data(data)
-      .enter()
-      .append("rect")
-      .attr("x", d => xScale(d.name))
-      .attr("y", d => yScale(d.value))
-      .attr("width", xScale.bandwidth())
-      .attr("height", d => 300 - yScale(d.value))
-      .attr("fill", "steelblue");
-  };
-
   return (
-    <div>
-      <h1>FastAPI + React + D3.js</h1>
-      <svg ref={chartRef}></svg>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/air" element={<Air />} />
+        <Route path="/water" element={<Water />} />
+        <Route path="/ground" element={<Ground />} />
+      </Routes>
+    </Router>
   );
 }
 
