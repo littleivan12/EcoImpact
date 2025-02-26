@@ -74,6 +74,7 @@ function Water() {
   );
 }
 
+/*This is the ground page*/
 function Ground() {
   return (
     <div className="page-container ground-bg-updated">
