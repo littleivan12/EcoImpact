@@ -36,3 +36,155 @@
     transform: rotate(360deg);
   }
 }
+
+/* General styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+}
+
+.home-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  cursor: pointer;
+  color: white;
+  font-size: 2rem;
+}
+
+.section:hover {
+  transform: scale(1.05);
+}
+
+.section-icon {
+  font-size: 6rem;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-weight: 700;
+  font-size: 3rem;
+}
+
+.air-section {
+  background: linear-gradient(135deg, #fceabb 0%, #f8b500 100%);
+}
+
+.water-section {
+  background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+}
+
+.ground-section {
+  background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+}
+
+/* Page and Card Styling */
+.page-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.page-title {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+}
+
+.card-container {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.info-card {
+  width: 300px;
+  padding: 2rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  text-align: center;
+}
+
+.clickable-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.fight-box {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #d9534f;
+  margin: 1rem 0;
+  animation: pulse 1.5s infinite;
+}
+
+.map-icon {
+  font-size: 5rem;
+  margin: 1rem 0;
+  color: #4a4a4a;
+}
+
+.coming-soon {
+  font-style: italic;
+  color: #777;
+}
+
+/* Updated backgrounds for Water and Ground pages */
+.water-bg-updated {
+  background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.ground-bg-updated {
+  background: linear-gradient(135deg, #76b852 0%, #8DC26F 100%);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
