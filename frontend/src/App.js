@@ -1,5 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
+import { Route, Routes } from 'react-router-dom';
+import HomeAir from './components/pages/air/home';
+import HomeWater from './components/pages/water/home';
+import HomeGround from './components/pages/ground/home';
 
 function App() {
   const [data, setData] = useState([]);
@@ -45,10 +49,21 @@ function App() {
       .attr("fill", "steelblue");
   };
 
+  function Routing(){
+    <Routes>
+        <Route path="/air" element={<HomeAir />} />
+        <Route path="/water" element={<HomeWater />} />
+        <Route path="/ground" element={<HomeGround />} />
+        <Route path="/home" element="Home" />
+    </Routes>
+  }
+
   return (
     <div>
       <h1>FastAPI + React + D3.js</h1>
       <svg ref={chartRef}></svg>
+
+      <Routing />
     </div>
   );
 }
