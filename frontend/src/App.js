@@ -4,6 +4,7 @@ import { FaCloud, FaWater, FaTree, FaMapMarkedAlt, FaSnowflake, FaRecycle, FaTra
 import "./App.css";
 import Selectbox from "./components/Selectbox.js";
 
+
 function Home() {
   return (
     <div className="h-screen flex">
@@ -12,18 +13,21 @@ function Home() {
         className="bg-yellow-200 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-yellow-300 transition"
       >
         <Selectbox page="Air"/>
+        Air
       </Link>
       <Link
         to="/water"
         className="bg-blue-500 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-blue-600 transition text-white"
       >
         <Selectbox page="Water"/>
+        Water
       </Link>
       <Link
         to="/ground"
         className="bg-green-400 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-green-500 transition text-white"
       >
         <Selectbox page="Ground"/>
+        Ground
       </Link>
     </div>
   );
