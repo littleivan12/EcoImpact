@@ -6,27 +6,29 @@ import MapPage from "./MapPage";
 import IceSheets from "./IceSheets";
 import StickAround from "./StickAround";
 import CarbonComparison from "./CarbonComparison";
+import Selectbox from "./components/Selectbox.js";
+
 
 function Home() {
   return (
     <div className="h-screen flex">
       <Link
         to="/air"
-        className="bg-yellow-200 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-yellow-300 transition"
+        className="bg-yellow-200 flex-1 flex items-center justify-left text-4xl font-bold hover:bg-yellow-300 transition"
       >
-        Air
+        <Selectbox page="air" label="Air"/>
       </Link>
       <Link
         to="/water"
         className="bg-blue-500 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-blue-600 transition text-white"
       >
-        Water
+        <Selectbox page="water" label="Water"/>
       </Link>
       <Link
         to="/ground"
-        className="bg-green-400 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-green-500 transition text-white"
+        className="bg-green-400 flex-1 flex items-center justify-right text-4xl font-bold hover:bg-green-500 transition text-white"
       >
-        Ground
+        <Selectbox page="ground" label="Ground"/>
       </Link>
     </div>
   );
@@ -112,7 +114,7 @@ function Ground() {
 
 function App() {
   return (
-    <Router>
+    //<Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/air" element={<Air />} />
@@ -123,7 +125,7 @@ function App() {
         <Route path="/stick-around" element={<StickAround />} />
         <Route path="/carbon-comparison" element={<CarbonComparison />} />
       </Routes>
-    </Router>
+    //</Router>
   );
 }
 
