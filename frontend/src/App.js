@@ -10,27 +10,21 @@ function Home() {
     <div className="h-screen flex">
       <Link
         to="/air"
-        className="bg-yellow-200 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-yellow-300 transition"
+        className="bg-yellow-200 flex-1 flex items-center justify-left text-4xl font-bold hover:bg-yellow-300 transition"
       >
-        <Selectbox page="Air"/>
+        <Selectbox page="air" label="Air"/>
       </Link>
       <Link
         to="/water"
         className="bg-blue-500 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-blue-600 transition text-white"
       >
-        <Selectbox page="Water"/>
+        <Selectbox page="water" label="Water"/>
       </Link>
       <Link
         to="/ground"
-        className="bg-green-400 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-green-500 transition text-white"
+        className="bg-green-400 flex-1 flex items-center justify-right text-4xl font-bold hover:bg-green-500 transition text-white"
       >
-        <Selectbox page="Ground"/>
-      </Link>
-      <Link
-        to="/"
-        className="bg-blue-500 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-blue-600 transition text-white"
-      >
-        <Selectbox page="Home"/>
+        <Selectbox page="ground" label="Ground"/>
       </Link>
     </div>
   );
