@@ -12,10 +12,6 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
-      <Selectbox page="the Air" destination="/air" />
-      <Selectbox page="the Water" destination="/water" />
-      <Selectbox page="the Ground" destination="/ground" />
-      <Selectbox page="this" destination="/home" />
     </BrowserRouter>
   </React.StrictMode>
 );

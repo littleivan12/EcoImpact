@@ -13,21 +13,24 @@ function Home() {
         className="bg-yellow-200 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-yellow-300 transition"
       >
         <Selectbox page="Air"/>
-        Air
       </Link>
       <Link
         to="/water"
         className="bg-blue-500 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-blue-600 transition text-white"
       >
         <Selectbox page="Water"/>
-        Water
       </Link>
       <Link
         to="/ground"
         className="bg-green-400 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-green-500 transition text-white"
       >
         <Selectbox page="Ground"/>
-        Ground
+      </Link>
+      <Link
+        to="/"
+        className="bg-blue-500 flex-1 flex items-center justify-center text-4xl font-bold hover:bg-blue-600 transition text-white"
+      >
+        <Selectbox page="Home"/>
       </Link>
     </div>
   );
@@ -108,14 +111,14 @@ function Ground() {
 
 function App() {
   return (
-    <Router>
+    //<Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/air" element={<Air />} />
         <Route path="/water" element={<Water />} />
         <Route path="/ground" element={<Ground />} />
       </Routes>
-    </Router>
+    //</Router>
   );
 }
 

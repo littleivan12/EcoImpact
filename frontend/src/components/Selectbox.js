@@ -1,14 +1,16 @@
 import React from 'react'
+import { FaCloud, FaWater, FaTree, FaMapMarkedAlt, FaSnowflake, FaRecycle, FaTrash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
-function Selectbox({page}){
+function Selectbox({page, img, idle_anim, bg_color}){
     return(
         <>
-            <button className="select">
-                    <div className="select-container">
-                        <h1>Click to go to {page} page</h1>
-                    </div>
-            </button>   
+            <div className="card-container">
+                <div className="info-card clickable-card">
+                    
+                    <h2>{page}</h2>
+                </div>
+            </div>
         </>
     );
 }
