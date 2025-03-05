@@ -1,0 +1,75 @@
+/* Ensure both images and video elements are correctly positioned and sized */
+.media-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Ensure media is above the background */
+  }
+  
+  .image-resize {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Ensures the image/video fill the container */
+    transition: opacity 0.5s ease-in-out; /* Smooth transition */
+}
+  
+  .media-element {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video covers the container */
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
+    opacity: 0;  /* Hide the video by default */
+}
+  
+  /* Background image that stays constant */
+  .bg-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;  /* Places the background behind everything */
+  }
+  
+  .bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8; /* Optional: reduce opacity for background effect */
+  }
+  
+  .info-card:hover .image-resize {
+    opacity: 0; /* Hide image */
+  }
+  
+  .info-card:hover .media-element {
+    opacity: 1; /* Show video */
+  }
+
+  .info-card {
+    position: relative; /* To position background image correctly */
+    overflow: hidden;   /* Prevents overflow */
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Optional hover effect on the card */
+  .info-card:hover {
+    transform: scale(1.05); /* Slightly enlarges the card on hover */
+  }
+  
+  /* Hover effects: When hovered, hide the image and show the video */
+  .info-card:hover .media-element {
+    opacity: 1; /* Make video fully visible on hover */
+  }
+  
+  .info-card:hover .image-resize {
+    opacity: 0; /* Fade image out on hover */
+  }
