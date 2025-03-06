@@ -42,8 +42,7 @@ function Selectbox({page, label}){
                             <source src={idle_anim} type="video/webm" />
                         </video>
                     </div>
-
-                    <h2>{label}</h2>
+                <h2 className="label-format">{label}</h2>
                 </div>
             </div>
         </>
