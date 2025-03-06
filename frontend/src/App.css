@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -113,6 +116,7 @@ body, html {
   gap: 2rem;
   flex-wrap: wrap;
   justify-content: center;
+  padding-bottom: 50px;
 }
 
 .info-card {
@@ -158,7 +162,7 @@ body, html {
 /* Updated backgrounds for Water and Ground pages */
 .water-bg-updated {
   background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%);
-  height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -169,7 +173,7 @@ body, html {
 
 .ground-bg-updated {
   background: linear-gradient(135deg, #76b852 0%, #8DC26F 100%);
-  height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
