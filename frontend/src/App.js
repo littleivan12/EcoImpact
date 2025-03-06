@@ -3,11 +3,13 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { FaCloud, FaWater, FaTree, FaMapMarkedAlt, FaSnowflake, FaRecycle, FaTrash } from "react-icons/fa";
 import "./App.css";
 import Selectbox from "./components/Selectbox.js";
+import Footer from "./components/Footer.js";
 
 
 function Home() {
   return (
     <div className="h-screen flex">
+      
       <Link
         to="/air"
         className="bg-yellow-200 flex-1 flex items-center justify-left text-4xl font-bold hover:bg-yellow-300 transition"
@@ -46,6 +48,12 @@ function Air() {
           <p className="coming-soon">(Coming Soon)</p>
         </div>
       </div>
+      <Link
+        to="/"
+        className="bg-green-400 flex-1 flex items-center justify-right text-4xl font-bold hover:bg-green-500 transition text-white"
+      >
+        <Footer />
+      </Link>
     </div>
   );
 }
@@ -72,6 +80,12 @@ function Water() {
           <p className="coming-soon">(Coming Soon)</p>
         </div>
       </div>
+      <Link
+        to="/"
+        className="bg-green-400 flex-1 flex items-center justify-right text-4xl font-bold hover:bg-green-500 transition text-white"
+      >
+        <Footer />
+      </Link>
     </div>
   );
 }
@@ -99,6 +113,12 @@ function Ground() {
           <p className="coming-soon">(Coming Soon)</p>
         </div>
       </div>
+      <Link
+        to="/"
+        className="bg-green-400 flex-1 flex items-center justify-right text-4xl font-bold hover:bg-green-500 transition text-white"
+      >
+        <Footer />
+      </Link>
     </div>
   );
 }
