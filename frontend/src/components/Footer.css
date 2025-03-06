@@ -1,0 +1,16 @@
+.footer-bar {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-weight: bolder;
+    font-size: 14px;
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.footer-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

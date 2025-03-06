@@ -7,11 +7,13 @@ import IceSheets from "./IceSheets";
 import StickAround from "./StickAround";
 import CarbonComparison from "./CarbonComparison";
 import Selectbox from "./components/Selectbox.js";
+import Footer from "./components/Footer.js";
 
 
 function Home() {
   return (
     <div className="h-screen flex">
+      
       <Link
         to="/air"
         className="bg-yellow-200 flex-1 flex items-center justify-left text-4xl font-bold hover:bg-yellow-300 transition"
@@ -53,6 +55,12 @@ function Air() {
           <p className="coming-soon">See the biggest CO2 contributors</p>
         </Link>
       </div>
+      <Link
+        to="/"
+        className="bg-green-400 flex-1 flex items-center justify-right text-4xl font-bold hover:bg-green-500 transition text-white"
+      >
+        <Footer />
+      </Link>
     </div>
   );
 }
@@ -80,6 +88,12 @@ function Water() {
           </p>
         </div>
       </div>
+      <Link
+        to="/"
+        className="bg-green-400 flex-1 flex items-center justify-right text-4xl font-bold hover:bg-green-500 transition text-white"
+      >
+        <Footer />
+      </Link>
     </div>
   );
 }
@@ -108,6 +122,12 @@ function Ground() {
           </p>
         </div>
       </div>
+      <Link
+        to="/"
+        className="bg-green-400 flex-1 flex items-center justify-right text-4xl font-bold hover:bg-green-500 transition text-white"
+      >
+        <Footer />
+      </Link>
     </div>
   );
 }
