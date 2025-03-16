@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./MapPage.css";
+import "./styles/MapPage.css";
 import worldMap from "./world-map-placeholder.png"; 
 
 function MapPage() {

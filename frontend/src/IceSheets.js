@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./IceSheets.css"; // New CSS file
+import "./styles/IceSheets.css"; // New CSS file
 import iceSheetImage from "./ice-sheet-placeholder.png"; // Placeholder image for ice sheet
 import seaLevelImage from "./sea-level-placeholder.png"; // Placeholder image for sea level
 

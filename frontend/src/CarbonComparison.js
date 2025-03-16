@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./CarbonComparison.css"; // New CSS file
+import "./styles/CarbonComparison.css"; // New CSS file
 
 function CarbonComparison() {
   const [userFootprint, setUserFootprint] = useState("");

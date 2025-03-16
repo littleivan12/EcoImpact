@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./StickAround.css"; // Updated styles
+import "./styles/StickAround.css"; // Updated styles
 
 function StickAround() {
   const [selectedMaterial, setSelectedMaterial] = useState("");
