@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./styles/MapPage.css";
-import worldMap from "./world-map-placeholder.png"; 
+import "../../styles/MapPage.css";
+import worldMap from "../../assets/world-map-placeholder.png";
 
 function MapPage() {
   const countries = [
@@ -13,25 +13,32 @@ function MapPage() {
     { name: "Russia", emissions: 3500 },
   ];
 
-  const totalInitialEmissions = countries.reduce((sum, country) => sum + country.emissions, 0);
+  const totalInitialEmissions = countries.reduce(
+    (sum, country) => sum + country.emissions,
+    0
+  );
 
   const [selectedCountries, setSelectedCountries] = useState(
     countries.reduce((acc, country) => ({ ...acc, [country.name]: true }), {})
   );
 
   const totalEmissions = countries.reduce(
-    (sum, country) => (selectedCountries[country.name] ? sum + country.emissions : sum),
+    (sum, country) =>
+      selectedCountries[country.name] ? sum + country.emissions : sum,
     0
   );
 
   const deselectCountry = (countryName) => {
-    setSelectedCountries((prev) => ({ ...prev, [countryName]: !prev[countryName] }));
+    setSelectedCountries((prev) => ({
+      ...prev,
+      [countryName]: !prev[countryName],
+    }));
   };
 
   return (
     <div className="map-page-container">
-      {/* Home Icon Button */}
-      <Link to="/" className="home-icon"></Link>
+      {/* Go back to air page*/}
+      <Link to="/air" className="home-icon"></Link>
 
       <h1 className="map-title">National Impact</h1>
       <p className="map-subtitle">Click a location to remove their emissions</p>
@@ -45,7 +52,9 @@ function MapPage() {
             {countries.map((country) => (
               <button
                 key={country.name}
-                className={`country-button ${selectedCountries[country.name] ? "selected" : "deselected"}`}
+                className={`country-button ${
+                  selectedCountries[country.name] ? "selected" : "deselected"
+                }`}
                 onClick={() => deselectCountry(country.name)}
               >
                 {country.name}
@@ -69,7 +78,9 @@ function MapPage() {
         <div className="co2-bar">
           <div
             className="co2-progress"
-            style={{ width: `${(totalEmissions / totalInitialEmissions) * 100}%` }}
+            style={{
+              width: `${(totalEmissions / totalInitialEmissions) * 100}%`,
+            }}
           ></div>
         </div>
         <p>{totalEmissions.toLocaleString()} million metric tons</p>

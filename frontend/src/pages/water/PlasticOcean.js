@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./styles/PlasticOcean.css"; // New CSS file
+import "../../styles/PlasticOcean.css"; // New CSS file
 
 function PlasticOcean() {
   const [year, setYear] = useState(2025);
@@ -17,14 +17,14 @@ function PlasticOcean() {
 
   return (
     <div className="plastic-ocean-page">
-      {/* Home Button (Top Left) */}
-      <Link to="/" className="home-icon"></Link>
+      {/* Go back to water page*/}
+      <Link to="/water" className="home-icon"></Link>
 
-      <h1 className="page-title">Ecolmpact</h1>
-      <h2 className="section-title">Plastic in the Ocean</h2>
+      <h1 className="page-title">Plastic in the Ocean</h1>
 
       <p className="description">
-        By {year}, an estimated <strong>{plasticCoverage[year]}%</strong> of the ocean could be plastic waste.
+        By {year}, an estimated <strong>{plasticCoverage[year]}%</strong> of the
+        ocean could be plastic waste.
       </p>
 
       {/* Visual Representation */}

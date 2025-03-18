@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./styles/IceSheets.css"; // New CSS file
-import iceSheetImage from "./ice-sheet-placeholder.png"; // Placeholder image for ice sheet
-import seaLevelImage from "./sea-level-placeholder.png"; // Placeholder image for sea level
+import "../../styles/IceSheets.css"; // New CSS file
+import iceSheetImage from "../../assets/ice-sheet-placeholder.png"; // Placeholder image for ice sheet
+import seaLevelImage from "../../assets/sea-level-placeholder.png"; // Placeholder image for sea level
 
 function IceSheets() {
   const [meltedSheets, setMeltedSheets] = useState(0);
 
   return (
     <div className="ice-sheet-page">
-      {/* Home Button in Top Left */}
-      <Link to="/" className="home-icon"></Link>
+      {/* Go back to water page*/}
+      <Link to="/water" className="home-icon"></Link>
 
       <h1 className="page-title">Ecolmpact</h1>
 
@@ -28,7 +28,9 @@ function IceSheets() {
               onChange={(e) => setMeltedSheets(e.target.value)}
               className="slider"
             />
-            <span className="slider-label">{meltedSheets} Ice Sheets Melted</span>
+            <span className="slider-label">
+              {meltedSheets} Ice Sheets Melted
+            </span>
           </div>
         </div>
 

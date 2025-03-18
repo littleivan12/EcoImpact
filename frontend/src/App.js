@@ -2,12 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { FaCloud, FaWater, FaTree, FaMapMarkedAlt, FaSnowflake, FaRecycle, FaTrash } from "react-icons/fa";
 import "./styles/App.css";
-import MapPage from "./MapPage";
-import IceSheets from "./IceSheets";
-import StickAround from "./StickAround";
-import CarbonComparison from "./CarbonComparison";
-import PlasticOcean from "./PlasticOcean";
-import FarmEmissions from "./FarmEmissions";
+import MapPage from "./pages/air/MapPage.js";
+import IceSheets from "./pages/water/IceSheets.js";
+import StickAround from "./pages/ground/StickAround.js";
+import CarbonComparison from "./pages/air/CarbonComparison.js";
+import PlasticOcean from "./pages/water/PlasticOcean.js";
+import FarmEmissions from "./pages/ground/FarmEmissions.js";
 import Selectbox from "./components/Selectbox.js";
 import Footer from "./components/Footer.js";
 
@@ -83,7 +83,7 @@ function Water() {
         </Link>
 
         <Link to="/plastic-ocean" className="info-card clickable-card">
-          <h3 className="card-title">Water Pollution Insights</h3>
+          <h3 className="card-title">A Plastic Ocean</h3>
           <FaWater className="map-icon" />
           <p className="page-description">
             See how much of the ocean could become plastic.

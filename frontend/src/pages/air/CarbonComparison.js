@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./styles/CarbonComparison.css"; // New CSS file
+import "../../styles/CarbonComparison.css"; // New CSS file
 
 function CarbonComparison() {
   const [userFootprint, setUserFootprint] = useState("");
@@ -9,10 +9,10 @@ function CarbonComparison() {
 
   // Mock company carbon footprints in units
   const companyFootprints = {
-    "Amazon": 18000,
-    "Google": 9000,
-    "Tesla": 4000,
-    "ExxonMobil": 50000,
+    Amazon: 18000,
+    Google: 9000,
+    Tesla: 4000,
+    ExxonMobil: 50000,
   };
 
   const handleCompare = () => {
@@ -23,8 +23,8 @@ function CarbonComparison() {
 
   return (
     <div className="carbon-page">
-      {/* Home Button (Top Left) */}
-      <Link to="/" className="home-icon"></Link>
+      {/* Go back to air page*/}
+      <Link to="/air" className="home-icon"></Link>
 
       <h1 className="page-title">Ecolmpact</h1>
       <h2 className="section-title">Carbon Comparison</h2>
@@ -51,7 +51,9 @@ function CarbonComparison() {
             >
               <option value="">Select a company</option>
               {Object.keys(companyFootprints).map((company) => (
-                <option key={company} value={company}>{company}</option>
+                <option key={company} value={company}>
+                  {company}
+                </option>
               ))}
             </select>
           </div>
@@ -76,10 +78,15 @@ function CarbonComparison() {
             </div>
             <div className="footprint">
               <div className="circle company-circle"></div>
-              <p>{selectedCompany}: {companyFootprints[selectedCompany]} Units</p>
+              <p>
+                {selectedCompany}: {companyFootprints[selectedCompany]} Units
+              </p>
             </div>
           </div>
-          <button className="reset-button" onClick={() => setShowComparison(false)}>
+          <button
+            className="reset-button"
+            onClick={() => setShowComparison(false)}
+          >
             Reset Comparison
           </button>
         </div>
