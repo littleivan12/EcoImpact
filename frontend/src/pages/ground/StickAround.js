@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./StickAround.css"; // Updated styles
+import "../../styles/StickAround.css"; // Updated styles
 
 function StickAround() {
   const [selectedMaterial, setSelectedMaterial] = useState("");
@@ -14,31 +14,41 @@ function StickAround() {
 
   return (
     <div className="stick-around-page">
-      {/* Home Button (Top Left) */}
-      <Link to="/" className="home-icon"></Link>
+      {/* Go back to ground page*/}
+      <Link to="/ground" className="home-icon"></Link>
 
       <h1 className="page-title">Stick Around</h1>
-      <p className="subtitle">See how long daily items last before they degrade</p>
+      <p className="subtitle">
+        See how long daily items last before they degrade
+      </p>
 
       {/* Selection Controls */}
       <div className="selection-container">
-        <h2 className="selection-title">Choose an Item to Litter in Ancient Rome</h2>
+        <h2 className="selection-title">
+          Choose an Item to Litter in Ancient Rome
+        </h2>
 
         <div className="material-buttons">
           <button
-            className={`material-button ${selectedMaterial === "metal-cup" ? "selected" : ""}`}
+            className={`material-button ${
+              selectedMaterial === "metal-cup" ? "selected" : ""
+            }`}
             onClick={() => setSelectedMaterial("metal-cup")}
           >
             Metal Cup
           </button>
           <button
-            className={`material-button ${selectedMaterial === "plastic-cup" ? "selected" : ""}`}
+            className={`material-button ${
+              selectedMaterial === "plastic-cup" ? "selected" : ""
+            }`}
             onClick={() => setSelectedMaterial("plastic-cup")}
           >
             Plastic Cup
           </button>
           <button
-            className={`material-button ${selectedMaterial === "biodegradable-cup" ? "selected" : ""}`}
+            className={`material-button ${
+              selectedMaterial === "biodegradable-cup" ? "selected" : ""
+            }`}
             onClick={() => setSelectedMaterial("biodegradable-cup")}
           >
             Biodegradable Cup
@@ -49,9 +59,13 @@ function StickAround() {
       {/* Display Result */}
       {selectedMaterial && (
         <div className="degradation-result">
-          <h3>You dropped a {selectedMaterial.replace("-", " ")} in Ancient Rome...</h3>
+          <h3>
+            You dropped a {selectedMaterial.replace("-", " ")} in Ancient
+            Rome...
+          </h3>
           <p>
-            It will fully degrade by <strong>{degradationData[selectedMaterial].degradesIn}</strong>.
+            It will fully degrade by{" "}
+            <strong>{degradationData[selectedMaterial].degradesIn}</strong>.
           </p>
 
           {/* Timeline Visualization */}
@@ -60,7 +74,11 @@ function StickAround() {
             <div className="timeline">
               <div
                 className="timeline-marker"
-                style={{ left: `${(degradationData[selectedMaterial].years / 5000) * 100}%` }}
+                style={{
+                  left: `${
+                    (degradationData[selectedMaterial].years / 5000) * 100
+                  }%`,
+                }}
               >
                 {degradationData[selectedMaterial].degradesIn}
               </div>
