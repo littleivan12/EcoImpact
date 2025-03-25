@@ -1,13 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { FaCloud, FaWater, FaTree, FaMapMarkedAlt, FaSnowflake, FaRecycle, FaTrash } from "react-icons/fa";
-import "./styles/App.css";
-import MapPage from "./pages/air/MapPage.js";
-import IceSheets from "./pages/water/IceSheets.js";
-import StickAround from "./pages/ground/StickAround.js";
-import CarbonComparison from "./pages/air/CarbonComparison.js";
-import PlasticOcean from "./pages/water/PlasticOcean.js";
-import FarmEmissions from "./pages/ground/FarmEmissions.js";
+import "./App.css";
 import Selectbox from "./components/Selectbox.js";
 import Footer from "./components/Footer.js";
 
@@ -43,19 +37,16 @@ function Air() {
     <div className="page-container air-bg">
       <h1 className="page-title">This is the state of our Air</h1>
       <div className="card-container">
-        
-        {/* Carbon Comparison Card (Company V. You) Links to Carbon Comparison Page */}
-        <Link to="/carbon-comparison" className="info-card clickable-card">
+        <div className="info-card clickable-card">
           <h2>Company V. You</h2>
           <div className="fight-box">FIGHT ⚡🔥</div>
           <p>⚡💨 Emissions vs. Your Actions 💨⚡</p>
-        </Link>
-
-        <Link to="/map" className="info-card clickable-card">
+        </div>
+        <div className="info-card clickable-card">
           <h3 className="card-title">Map the Emissions 🌎</h3>
           <FaMapMarkedAlt className="map-icon" />
-          <p className="coming-soon">See the biggest CO2 contributors</p>
-        </Link>
+          <p className="coming-soon">(Coming Soon)</p>
+        </div>
       </div>
       <Link
         to="/"
@@ -72,23 +63,22 @@ function Water() {
     <div className="page-container water-bg-updated">
       <h1 className="page-title">Water</h1>
       <div className="card-container">
-        
-        {/* Link "Ice? Sheet!" Card to Ice Sheets Page */}
-        <Link to="/ice-sheets" className="info-card clickable-card">
+        <div className="info-card clickable-card">
           <h3 className="card-title">Ice? Sheet!</h3>
           <FaSnowflake className="map-icon" />
           <p className="page-description">
-            Visualize the effect of ice sheets melting on sea levels.
+            Visualize the effect of ice sheets melting on sea levels. Interactive animations coming soon.
           </p>
-        </Link>
-
-        <Link to="/plastic-ocean" className="info-card clickable-card">
-          <h3 className="card-title">A Plastic Ocean</h3>
+          <p className="coming-soon">(Coming Soon)</p>
+        </div>
+        <div className="info-card clickable-card">
+          <h3 className="card-title">Water Pollution Insights</h3>
           <FaWater className="map-icon" />
           <p className="page-description">
-            See how much of the ocean could become plastic.
+            Explore ocean contamination rates, ecosystem impacts, and clean water access data.
           </p>
-        </Link>
+          <p className="coming-soon">(Coming Soon)</p>
+        </div>
       </div>
       <Link
         to="/"
@@ -106,23 +96,22 @@ function Ground() {
     <div className="page-container ground-bg-updated">
       <h1 className="page-title">Ground</h1>
       <div className="card-container">
-        
-        {/* Link "Stick Around?" Card to Stick Around Page */}
-        <Link to="/stick-around" className="info-card clickable-card">
+        <div className="info-card clickable-card">
           <h3 className="card-title">Stick Around?</h3>
           <FaTrash className="map-icon" />
           <p className="page-description">
             Discover how long common items last before degrading back into the environment.
           </p>
-        </Link>
-
-        <Link to="/farm-emissions" className="info-card clickable-card">
-          <h3 className="card-title">Farm Emissions Showdown</h3>
+          <p className="coming-soon">(Coming Soon)</p>
+        </div>
+        <div className="info-card clickable-card">
+          <h3 className="card-title">Soil Health & Degradation</h3>
           <FaRecycle className="map-icon" />
           <p className="page-description">
-            Learn about the impact of farming on the climate.
+            Learn about the impact of land-use changes and deforestation on soil health.
           </p>
-        </Link>
+          <p className="coming-soon">(Coming Soon)</p>
+        </div>
       </div>
       <Link
         to="/"
@@ -142,12 +131,6 @@ function App() {
         <Route path="/air" element={<Air />} />
         <Route path="/water" element={<Water />} />
         <Route path="/ground" element={<Ground />} />
-        <Route path="/map" element={<MapPage />} />
-        <Route path="/ice-sheets" element={<IceSheets />} />
-        <Route path="/stick-around" element={<StickAround />} />
-        <Route path="/carbon-comparison" element={<CarbonComparison />} />
-        <Route path="/plastic-ocean" element={<PlasticOcean />} />
-        <Route path="/farm-emissions" element={<FarmEmissions />} />
       </Routes>
     //</Router>
   );
