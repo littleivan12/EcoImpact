@@ -1,0 +1,116 @@
+.farm-emissions-page {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f3f0e5;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  /* Home Button */
+  .home-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    border-radius: 5px;
+    display: inline-block;
+    transition: background 0.3s;
+  }
+  
+  .home-icon:hover {
+    background-color: #555;
+  }
+  
+  /* Title */
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  /* Description */
+  .description {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Emissions Bubble (Main Visualization) */
+  .emissions-bubble {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: rgba(200, 200, 200, 0.2);
+    margin: 20px auto;
+    position: relative;
+  }
+  
+  /* Gas Clouds */
+  .gas-cloud {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+    transition: width 0.5s, height 0.5s;
+  }
+  
+  .cow-cloud {
+    background-color: rgba(255, 200, 0, 0.5);
+    top: 40%;
+    left: 20%;
+  }
+  
+  .rice-cloud {
+    background-color: rgba(100, 255, 100, 0.5);
+    top: 10%;
+    left: 50%;
+  }
+  
+  .industrial-cloud {
+    background-color: rgba(255, 50, 50, 0.5);
+    bottom: 10%;
+    right: 30%;
+  }
+  
+  /* Emission Sources */
+  .emission-sources {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .emission-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 2px solid #333;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+  
+  .emission-button:hover {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  /* Emission Info */
+  .emission-info {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .emission-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }

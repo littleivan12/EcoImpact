@@ -1,0 +1,12 @@
+object_id,object_name,object_type,time_period
+1,Cigarette Butts,Plastic,10
+2, Plastic Bags,Plastic,1000
+3,Foam Plastic Cups,Plastic,50
+4,Wet wipes,Plastic,100
+5,Tires,Plastic,2000
+6,Vegetables,Biodegradable ,30
+7,Orange Peels,Biodegradable ,183
+8,Banana Peels,Biodegradable ,183
+9,Waxed Milk Cartons,Plastic,90
+10,Apple Cores,Biodegradable ,60
+11,Glass,,1000000

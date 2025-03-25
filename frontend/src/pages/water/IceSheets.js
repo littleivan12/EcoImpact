@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/IceSheets.css"; // New CSS file
-import seaLevelImage from "../../assets/sea-level-placeholder.png"; // Placeholder image for sea level
 
 function SeaLvlImage({value}) {
   if(value >= 0 && value <= 2){
@@ -29,7 +28,6 @@ function IceSheets() {
       <div className="visualization-container">
         {/* Ice Sheet Melting Section */}
         <div className="ice-sheet-section">
-          {/* Function that changes image depending on the next container's value */}
           <img src={`/visuals/water/sheets/sheet${meltedSheets}.png`} alt="Ice Sheet" className="ice-sheet-img" />
 
           <div className="slider-container">
