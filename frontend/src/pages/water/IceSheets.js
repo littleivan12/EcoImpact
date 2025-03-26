@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/IceSheets.css"; // New CSS file
-import iceSheetImage from "../../assets/ice-sheet-placeholder.png"; // Placeholder image for ice sheet
-import seaLevelImage from "../../assets/sea-level-placeholder.png"; // Placeholder image for sea level
+
+function SeaLvlImage({value}) {
+  if(value >= 0 && value <= 2){
+    return <img src={`/visuals/water/levels/levels0.png`} alt="Ice Sheet" className="ice-sheet-img" />;
+  } else if(value >=3 && value <=5) {
+    return <img src={`/visuals/water/levels/levels1.png`} alt="Ice Sheet" className="ice-sheet-img" />;
+  } else if(value >=6 && value <=8) {
+    return <img src={`/visuals/water/levels/levels2.png`} alt="Ice Sheet" className="ice-sheet-img" />;
+  } else{
+    return <img src={`/visuals/water/levels/levels3.png`} alt="Ice Sheet" className="ice-sheet-img" />;
+  }
+}
 
 function IceSheets() {
   const [meltedSheets, setMeltedSheets] = useState(0);
@@ -18,7 +28,8 @@ function IceSheets() {
       <div className="visualization-container">
         {/* Ice Sheet Melting Section */}
         <div className="ice-sheet-section">
-          <img src={iceSheetImage} alt="Ice Sheet" className="ice-sheet-img" />
+          <img src={`/visuals/water/sheets/sheet${meltedSheets}.png`} alt="Ice Sheet" className="ice-sheet-img" />
+
           <div className="slider-container">
             <input
               type="range"
@@ -36,7 +47,7 @@ function IceSheets() {
 
         {/* Sea Level Change Section */}
         <div className="sea-level-section">
-          <img src={seaLevelImage} alt="Sea Level" className="sea-level-img" />
+          <SeaLvlImage value={meltedSheets} />
           <p className="sea-level-label">Current Sea Level</p>
         </div>
       </div>

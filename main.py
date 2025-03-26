@@ -105,6 +105,15 @@ def get_air_super_by_country_code(country_code: str, db: Session = Depends(get_d
     # Convert to dictionary and return
     return [dict(row._mapping) for row in result]
 
+@app.get("/companies/")
+def get_companies(db: Session = Depends(get_db)):
+    result = db.execute(text("SELECT parent_entity, total_emissions FROM companies LIMIT 5")).fetchall()
+    
+    # Convert each row to a dictionary
+    data = [{"name": row[0], "yearly_emissions": row[1]} for row in result]
+    
+    return data
+
 @app.get("/air_super/year/{year}")
 def get_air_super_by_year(year: int, db: Session = Depends(get_db)):
     query = text('SELECT * FROM air_super WHERE "Year" = :year;')

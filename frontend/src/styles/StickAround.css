@@ -69,6 +69,11 @@
     color: white;
   }
   
+  /* Degradation Image */
+  .degrade-img {
+    width: 300px;
+  }
+
   /* Degradation Result */
   .degradation-result {
     margin-top: 2rem;
