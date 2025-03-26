@@ -3,6 +3,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from sqlalchemy import text
+from fastapi.middleware.cors import CORSMiddleware
 
 
 from database import SessionLocal, engine
@@ -12,6 +13,21 @@ import models
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+# Add CORSMiddleware to your FastAPI app to allow requests from your frontend
+origins = [
+    "http://localhost:3000",  # Allow requests from the frontend
+    "http://127.0.0.1:8000",  # Allow requests from the backend server itself (if needed)
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Allows requests from your frontend and backend servers
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
+
 
 # Dependency to get the database session
 def get_db():
@@ -34,6 +50,7 @@ class AirSuperBase(BaseModel):
     flaring: float
     other: float
     per_capita: float
+    number_code:int
 class AirSuperCreate(AirSuperBase):
     pass
 
@@ -87,4 +104,34 @@ def get_air_super_by_country_code(country_code: str, db: Session = Depends(get_d
     
     # Convert to dictionary and return
     return [dict(row._mapping) for row in result]
+
+@app.get("/air_super/year/{year}")
+def get_air_super_by_year(year: int, db: Session = Depends(get_db)):
+    query = text('SELECT * FROM air_super WHERE "Year" = :year;')
+    result = db.execute(query, {"year": year}).fetchall()
+
+    if not result:
+        raise HTTPException(status_code=404, detail="No records found for the given year")
+
+    return [dict(row._mapping) for row in result]
+@app.get("/air_super/{country_code}/past_five_years")
+def get_past_five_years_by_country(country_code: str, db: Session = Depends(get_db)):
+    # SQL query to get the data from the last 5 years for a specific country
+    query = text("""
+    WITH MaxYear AS (
+        SELECT MAX("Year") AS latest_year FROM air_super WHERE country_code = :country_code
+    )
+    SELECT * 
+    FROM air_super 
+    WHERE "Year" >= (SELECT latest_year FROM MaxYear) - 4
+    AND country_code = :country_code;
+    """)
+    
+    result = db.execute(query, {"country_code": country_code}).fetchall()
+    
+    # Convert each row to a dictionary
+    data = [dict(row._mapping) for row in result]
+    
+    print(f"Total records from the past 5 years for {country_code}: {len(data)}")  # Debugging output
+    return data
 
