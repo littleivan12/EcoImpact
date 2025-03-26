@@ -2,6 +2,18 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/StickAround.css"; // Updated styles
 
+function CupType({type}){
+  if(type === "biodegradable-cup"){
+    return <img src={`/visuals/ground/cups/cup0.png`} alt="Biodegradable Cup" className="degrade-img" />;
+  } else if(type === "plastic-cup") {
+    return <img src={`/visuals/ground/cups/cup1.png`} alt="Plastic Cup" className="degrade-img" />;
+  } else if(type === "metal-cup") {
+    return <img src={`/visuals/ground/cups/cup2.png`} alt="Metal Cup" className="degrade-img" />;
+  } else {
+    return null;
+  }
+}
+
 function StickAround() {
   const [selectedMaterial, setSelectedMaterial] = useState("");
 
@@ -59,6 +71,8 @@ function StickAround() {
       {/* Display Result */}
       {selectedMaterial && (
         <div className="degradation-result">
+          <CupType type={selectedMaterial}/>
+          
           <h3>
             You dropped a {selectedMaterial.replace("-", " ")} in Ancient
             Rome...
