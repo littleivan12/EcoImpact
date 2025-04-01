@@ -48,7 +48,7 @@
     justify-content: center;
     align-items: flex-end;
     height: 300px;
-    background-color: #0077be;
+    /*background-color: #0077be;*/
     border-radius: 10px;
     position: relative;
     overflow: hidden;
@@ -58,7 +58,8 @@
     width: 80%;
     max-width: 600px;
     height: 100%;
-    background: linear-gradient(to bottom, #005f99, #003f66);
+    background-image: url("/public/visuals/water/trash/ocean.png");
+    background-size: cover;
     position: relative;
     border-radius: 10px;
   }
@@ -67,7 +68,8 @@
     width: 100%;
     position: absolute;
     bottom: 0;
-    background: rgba(255, 0, 0, 0.6);
+    background-image: url("/public/visuals/water/trash/trash.png");
+    background-size: cover;
     transition: height 0.5s ease-in-out;
   }
   
