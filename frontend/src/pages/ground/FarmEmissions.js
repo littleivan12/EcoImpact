@@ -2,38 +2,44 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/FarmEmissions.css";
 
+// Accurate EPA emissions data (2022, approx. US)
+const emissionsData = {
+  cow: {
+    name: "Cow Burps (Enteric Fermentation)",
+    description: "Cows release methane (CH₄) while digesting food.",
+    annualEmissions: 178, // Million metric tons CO₂ equivalent (highest)
+  },
+  rice: {
+    name: "Rice Cultivation",
+    description: "Rice paddies emit methane due to waterlogged fields.",
+    annualEmissions: 15, // Smaller scale
+  },
+  industrial: {
+    name: "Manure Management",
+    description: "Manure storage and treatment release methane (CH₄).",
+    annualEmissions: 68, // Moderate scale
+  },
+};
+
+// Scale factor for visual growth
+const SCALE_FACTOR = 0.5;
+
 function FarmEmissions() {
   const [selectedSource, setSelectedSource] = useState(null);
-  const [gasSizes, setGasSizes] = useState({ cow: 0, rice: 0, industrial: 0 });
   const [clickCounts, setClickCounts] = useState({ cow: 0, rice: 0, industrial: 0 });
-
-  const emissionsData = {
-    cow: {
-      name: "Cow Burps",
-      description: "Cows release methane (CH₄) when digesting food.",
-      growth: 80,  // Dramatic increase
-    },
-    rice: {
-      name: "Rice Fields",
-      description: "Rice paddies produce methane due to waterlogged conditions.",
-      growth: 40,
-    },
-    industrial: {
-      name: "Industrial Farming",
-      description: "Factories and transport emit significant CO₂ emissions.",
-      growth: 120,  // Largest growth
-    },
-  };
+  const [gasSizes, setGasSizes] = useState({ cow: 0, rice: 0, industrial: 0 });
 
   const handleClick = (source) => {
     setSelectedSource(source);
-    setGasSizes((prev) => ({
-      ...prev,
-      [source]: prev[source] + emissionsData[source].growth,
+
+    setClickCounts((prevCounts) => ({
+      ...prevCounts,
+      [source]: prevCounts[source] + 1,
     }));
-    setClickCounts((prev) => ({
-      ...prev,
-      [source]: prev[source] + 1,
+
+    setGasSizes((prevSizes) => ({
+      ...prevSizes,
+      [source]: prevSizes[source] + emissionsData[source].annualEmissions * SCALE_FACTOR,
     }));
   };
 
@@ -46,59 +52,57 @@ function FarmEmissions() {
   return (
     <div className="farm-emissions-page">
       <Link to="/ground" className="home-icon"></Link>
+
       <h1 className="page-title">Farm Emissions Showdown</h1>
       <p className="description">
-        Click on a source to see how their emissions grow!
+        Click a source to see its annual greenhouse gas emissions grow proportionally.
       </p>
 
-      <div className="visualization-container">
+      <div className="content-container">
+        {/* Visualization Bubble */}
         <div className="emissions-bubble">
           <div
             className="gas-cloud cow-cloud"
-            style={{ width: `${gasSizes.cow}px`, height: `${gasSizes.cow}px` }}
+            style={{ width: gasSizes.cow, height: gasSizes.cow }}
           >
             🐄
           </div>
           <div
             className="gas-cloud rice-cloud"
-            style={{ width: `${gasSizes.rice}px`, height: `${gasSizes.rice}px` }}
+            style={{ width: gasSizes.rice, height: gasSizes.rice }}
           >
             🌾
           </div>
           <div
             className="gas-cloud industrial-cloud"
-            style={{ width: `${gasSizes.industrial}px`, height: `${gasSizes.industrial}px` }}
+            style={{ width: gasSizes.industrial, height: gasSizes.industrial }}
           >
             🏭
           </div>
         </div>
 
-        <div className="controls-container">
-          <div className="emission-sources">
-            {Object.keys(emissionsData).map((source) => (
-              <button
-                key={source}
-                className="emission-button"
-                onClick={() => handleClick(source)}
-              >
-                {source === "cow" ? "🐄 Cow" : source === "rice" ? "🌾 Rice" : "🏭 Industrial"}
-              </button>
-            ))}
-          </div>
-
-          <div className="click-counts">
-            <h4>Click Counts</h4>
-            <ul>
-              <li>Cow 🐄: {clickCounts.cow}</li>
-              <li>Rice 🌾: {clickCounts.rice}</li>
-              <li>Industrial 🏭: {clickCounts.industrial}</li>
-            </ul>
-          </div>
+        {/* Options and click counts */}
+        <div className="options-container">
+          <h3>Emission Sources:</h3>
+          {Object.keys(emissionsData).map((source) => (
+            <button
+              key={source}
+              className="emission-button"
+              onClick={() => handleClick(source)}
+            >
+              {source === "cow" ? "🐄 Cow Burps" : source === "rice" ? "🌾 Rice Cultivation" : "🏭 Manure Management"}
+              <span className="click-count">Clicked: {clickCounts[source]} times</span>
+            </button>
+          ))}
 
           {selectedSource && (
             <div className="emission-info">
-              <h3>{emissionsData[selectedSource].name}</h3>
+              <h4>{emissionsData[selectedSource].name}</h4>
               <p>{emissionsData[selectedSource].description}</p>
+              <p>
+                Annual Emissions:{" "}
+                <strong>{emissionsData[selectedSource].annualEmissions} Million Metric Tons CO₂ Eq.</strong>
+              </p>
             </div>
           )}
 
