@@ -1,9 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/MapPage.css";
 import worldMap from "../../assets/world-map-placeholder.png";
+import AirEffects from "../../components/AirEffects.js";
+
+function EffectNames({value, thresholds}){
+  /* Modify threshold values for words here */
+  const [effectWords, setEffectWords] = useState([]);
+  
+  useEffect(() => {
+    let newWords = [];
+
+    if (value > thresholds[0]) newWords.push("Acid Rain");
+    if (value > thresholds[1]) newWords.push("Plant Death");
+    if (value > thresholds[2]) newWords.push("Animal Death");
+
+    setEffectWords(newWords);
+
+  }, [value]);
+
+  return (
+    <div className="effect-container">
+      {effectWords.map((word, index) => (
+        <div
+          key={index}
+          className={`effect-word ${effectWords.includes(word) ? 'show' : ''}`}
+        >
+          {word}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function MapPage() {
+  /* Change Environment Impact thresholds here */
+  const limitArr = [5000, 10000, 15000];
+
   const countries = [
     { name: "USA", emissions: 5000 },
     { name: "China", emissions: 10000 },
@@ -67,8 +100,9 @@ function MapPage() {
         <div className="effects-container">
           <h2>Environmental Impact</h2>
           <div className="effects-placeholder">
-            <p>(Animated impact preview based on emissions)</p>
+            <AirEffects value={totalEmissions} set={limitArr}/>
           </div>
+          <EffectNames value={totalEmissions} thresholds={limitArr}/>
         </div>
       </div>
 
