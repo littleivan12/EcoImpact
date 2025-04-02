@@ -95,28 +95,30 @@ body, html {
 
 /* Page and Card Styling */
 .page-container {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+  height: 1000px;
+  gap: 2rem;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
   animation: fadeIn 1s ease-in-out;
 }
 
-.page-title {
-  font-size: 4rem;
+.page-title h1 {
+  font-size: 40px;
   font-weight: 800;
   margin-bottom: 2rem;
 }
 
 .card-container {
+  margin-top: 20px;
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
   justify-content: center;
   padding-bottom: 50px;
+  max-width: 100%;
 }
 
 .info-card {
