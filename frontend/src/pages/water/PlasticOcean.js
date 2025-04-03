@@ -135,21 +135,6 @@ function PlasticOcean() {
             style={{ height: `${coverage * 10}%` }}
           ></div>
 
-          {/* Floating plastic cups */}
-          {Array.from({ length: Math.floor(coverage * 10) }).map((_, i) => (
-            <img
-              key={`cup-${i}`}
-              src="/visuals/ground/cups/cup1.png"
-              alt="Plastic Cup"
-              className="floating-plastic"
-              style={{
-                left: `${Math.random() * 90}%`,
-                top: `${Math.random() * 80}%`,
-                animationDelay: `${Math.random() * 5}s`,
-              }}
-            />
-          ))}
-
           {/* Fish flee with more plastic */}
           {Array.from({ length: Math.max(0, 5 - step) }).map((_, i) => (
             <img
