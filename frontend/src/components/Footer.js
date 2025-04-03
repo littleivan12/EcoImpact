@@ -6,7 +6,7 @@ function FooterBar(){
     return(
         <footer class="footer-bar">
             <div class="footer-content">
-                <h1>[Footer Content]</h1>
+                <h1>[]</h1>
             </div>
         </footer>
     );
