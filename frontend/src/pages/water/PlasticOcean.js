@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../../styles/PlasticOcean.css"; // New CSS file
+import "../../styles/PlasticOcean.css";
 import BackButton from "../../components/BackButton.js";
 import TopBar from "../../components/TopBar.js";
 import Footer from "../../components/Footer.js";
@@ -8,7 +8,6 @@ import Footer from "../../components/Footer.js";
 function PlasticOcean() {
   const [projections, setProjections] = useState([]);
   const [step, setStep] = useState(0);
-
   const [selectedCountry, setSelectedCountry] = useState("USA");
   const [countryImpact, setCountryImpact] = useState(null);
   const [countryList, setCountryList] = useState([]);
@@ -72,14 +71,17 @@ function PlasticOcean() {
           : "#e0f7fa",
       }}
     >
-      <Link to="/water" className="home-icon"></Link>
+      <TopBar hex1="#4ebeee" hex2="#140b8d" />
+      <BackButton pageType="water" />
+
       <h1 className="page-title">Plastic in the Ocean</h1>
-      {/* Clarification Text */}
+
       <p className="explanation">
         Litter to see how plastic waste accumulates globally in the ocean over
         time. Select a country to see its impact on coastal waste risk and
         recycling rates.
       </p>
+
       {/* Country Selector */}
       <div className="selector-container">
         <label htmlFor="country">
@@ -125,6 +127,7 @@ function PlasticOcean() {
         the ocean may be covered in plastic.
       </p>
 
+      {/* Visual Representation */}
       <div className="ocean-container">
         <div className="ocean">
           <div
@@ -161,28 +164,8 @@ function PlasticOcean() {
               }}
             />
           ))}
-    <div>
-      <TopBar hex1="#4ebeee" hex2="#140b8d"/>
-      <div className="plastic-ocean-page">
-        {/* Go back to water page*/}
-        <BackButton pageType="water"/>
-
-        <h1 className="page-title">Plastic in the Ocean</h1>
-
-        <p className="description">
-          By {year}, an estimated <strong>{plasticCoverage[year]}%</strong> of the
-          ocean could be plastic waste.
-        </p>
-
-        {/* Visual Representation */}
-        <div className="ocean-container">
-          <div className="ocean">
-            <div
-              className="plastic-overlay"
-              style={{ height: `${plasticCoverage[year] * 10}%` }}
-            ></div>
-          </div>
         </div>
+      </div>
 
       <div className="button-group">
         <button
@@ -199,20 +182,7 @@ function PlasticOcean() {
       </div>
 
       <p className="impact-blurb">{impact}</p>
-        {/* Year Selection Slider */}
-        <div className="slider-container">
-          <input
-            type="range"
-            min="2025"
-            max="2070"
-            step="5"
-            value={year}
-            onChange={(e) => setYear(parseInt(e.target.value))}
-            className="slider"
-          />
-          <p>Year: {year}</p>
-        </div>
-      </div>
+
       <Footer />
     </div>
   );

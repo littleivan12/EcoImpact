@@ -1,3 +1,4 @@
+/* General Page Styling */
 .stick-around-page {
   text-align: center;
   padding: 2rem;
@@ -99,17 +100,6 @@
   border: 1px solid #333;
 }
 
-.recycle-animation {
-  width: 350px;
-  margin-top: 10px;
-}
-
-.flavor-text {
-  margin-top: 0.5rem;
-  font-style: italic;
-  color: #555;
-}
-
 .timeline-marker.end-marker {
   background-color: red;
   color: white;
@@ -117,6 +107,20 @@
   padding: 2px 6px;
 }
 
+/* Recycle Animation */
+.recycle-animation {
+  width: 350px;
+  margin-top: 10px;
+}
+
+/* Flavor Text */
+.flavor-text {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: #555;
+}
+
+/* Keyframes */
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -130,36 +134,4 @@
     transform: scale(1);
     opacity: 0.9;
   }
-  
-  .recycle-animation {
-    width: 350px;
-    margin-top: 10px;
-  }
-  
-  .flavor-text {
-    margin-top: 0.5rem;
-    font-style: italic;
-    color: #555;
-  }
-  
-  .timeline-marker.end-marker {
-    background-color: red;
-    color: white;
-    border-radius: 4px;
-    padding: 2px 6px;
-  }
-  
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-      opacity: 0.9;
-    }
-    50% {
-      transform: scale(1.1);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 0.9;
-    }
-  }
+}
