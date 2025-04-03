@@ -63,3 +63,64 @@
   font-weight: bold;
   margin-top: 10px;
 }
+    text-align: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  /* Title */
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+  
+  /* Visualization Container */
+  .visualization-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+  
+  /* Ice Sheet Section */
+  .ice-sheet-section {
+    text-align: center;
+  }
+  
+  .ice-sheet-img {
+    width: 250px;
+  }
+  
+  .slider-container {
+    margin-top: 1rem;
+  }
+  
+  .slider {
+    width: 200px;
+    margin: 10px 0;
+  }
+  
+  .slider-label {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  /* Sea Level Section */
+  .sea-level-section {
+    text-align: center;
+  }
+  
+  .sea-level-img {
+    width: 250px;
+  }
+  
+  .sea-level-label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  

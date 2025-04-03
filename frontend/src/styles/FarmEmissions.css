@@ -1,133 +1,119 @@
 .farm-emissions-page {
-  text-align: center;
-  padding: 2rem;
-  background-color: #f3f0e5;
-  min-height: 100vh;
-  position: relative;
-}
-
-.home-icon {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 40px;
-  height: 40px;
-  background-color: #333;
-  border-radius: 5px;
-  transition: background 0.3s;
-}
-
-.home-icon:hover {
-  background-color: #555;
-}
-
-.page-title {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.description {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-}
-
-.content-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 2rem;
-}
-
-.emissions-bubble {
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
-  background-color: rgba(200, 200, 200, 0.2);
-  position: relative;
-  flex-shrink: 0;
-}
-
-.gas-cloud {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: width 0.5s ease, height 0.5s ease;
-}
-
-.cow-cloud {
-  background-color: rgba(255, 200, 0, 0.6);
-  top: 25%;
-  left: 10%;
-}
-
-.rice-cloud {
-  background-color: rgba(100, 255, 100, 0.6);
-  top: 15%;
-  right: 15%;
-}
-
-.industrial-cloud {
-  background-color: rgba(255, 50, 50, 0.6);
-  bottom: 10%;
-  left: 35%;
-}
-
-.options-container {
-  max-width: 300px;
-  text-align: left;
-}
-
-.emission-button {
-  display: block;
-  width: 100%;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  font-size: 1rem;
-  border: 2px solid #333;
-  background-color: white;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.emission-button:hover {
-  background-color: #4caf50;
-  color: white;
-}
-
-.click-count {
-  display: block;
-  font-size: 0.85rem;
-  margin-top: 5px;
-  color: #555;
-}
-
-.emission-info {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.emission-info h4 {
-  margin-bottom: 0.75rem;
-}
-
-.reset-button {
-  padding: 8px 12px;
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  border-radius: 5px;
-  background-color: #333;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.reset-button:hover {
-  background-color: #555;
-}
+    text-align: center;
+    padding: 2rem;
+    background-color: #f3f0e5;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  /* Title */
+  .page-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .content-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+  
+  .emissions-bubble {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background-color: rgba(200, 200, 200, 0.2);
+    position: relative;
+    flex-shrink: 0;
+  }
+  
+  .gas-cloud {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: width 0.5s ease, height 0.5s ease;
+  }
+  
+  .cow-cloud {
+    background-color: rgba(255, 200, 0, 0.6);
+    top: 25%;
+    left: 10%;
+  }
+  
+  .rice-cloud {
+    background-color: rgba(100, 255, 100, 0.6);
+    top: 15%;
+    right: 15%;
+  }
+  
+  .industrial-cloud {
+    background-color: rgba(255, 50, 50, 0.6);
+    bottom: 10%;
+    left: 35%;
+  }
+  
+  .options-container {
+    max-width: 300px;
+    text-align: left;
+  }
+  
+  .emission-button {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    border: 2px solid #333;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .emission-button:hover {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .click-count {
+    display: block;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    color: #555;
+  }
+  
+  .emission-info {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  .emission-info h4 {
+    margin-bottom: 0.75rem;
+  }
+  
+  .reset-button {
+    padding: 8px 12px;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .reset-button:hover {
+    background-color: #555;
+  }

@@ -1,0 +1,15 @@
+.home-icon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: #bababa;
+  border-radius: 5px;
+  display: inline-block;
+  transition: background 0.3s;
+}
+
+.home-icon:hover {
+  background-color: #dfdfdf;
+}

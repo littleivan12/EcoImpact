@@ -3,6 +3,7 @@
     padding: 2rem;
     background-color: #f8f9fa;
     min-height: 100vh;
+    position: relative;
   }
   
   /* Title and Subtitle */
@@ -86,6 +87,37 @@
     border-radius: 10px;
   }
   
+  .effect-container {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    padding: 10px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .effect-word {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    margin-bottom: 10px;
+  }
+
+  .effect-word.show {
+    opacity: 1;
+  }
+
+  .effect-word:nth-child(1) {
+    transition-delay: 0s;
+  }
+  .effect-word:nth-child(2) {
+    transition-delay: 0.1s;
+  }
+  .effect-word:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+
   /* CO2 Bar */
   .co2-container {
     margin-top: 2rem;
@@ -123,22 +155,3 @@
   .back-button:hover {
     background-color: #555;
   }
-
-  /* Home Icon Button (Top Left) */
-.home-icon {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 40px; /* Placeholder square */
-    height: 40px;
-    background-color: #333; /* Dark color for now */
-    border-radius: 5px;
-    display: inline-block;
-    transition: background 0.3s;
-  }
-  
-  .home-icon:hover {
-    background-color: #555; /* Slightly lighter on hover */
-  }
-  
-  

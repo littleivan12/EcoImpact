@@ -6,23 +6,6 @@
   position: relative;
 }
 
-/* Home Button (Top Left) */
-.home-icon {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 40px;
-  height: 40px;
-  background-color: #333;
-  border-radius: 5px;
-  display: inline-block;
-  transition: background 0.3s;
-}
-
-.home-icon:hover {
-  background-color: #555;
-}
-
 /* Title */
 .page-title {
   font-size: 2.5rem;
@@ -147,4 +130,36 @@
     transform: scale(1);
     opacity: 0.9;
   }
-}
+  
+  .recycle-animation {
+    width: 350px;
+    margin-top: 10px;
+  }
+  
+  .flavor-text {
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: #555;
+  }
+  
+  .timeline-marker.end-marker {
+    background-color: red;
+    color: white;
+    border-radius: 4px;
+    padding: 2px 6px;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.9;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0.9;
+    }
+  }
