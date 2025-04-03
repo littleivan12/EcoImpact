@@ -12,24 +12,20 @@
   font-weight: bold;
   margin-bottom: 1rem;
 }
-
 .section-title {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 2rem;
 }
 
-/* Input Section */
 .input-section {
-  text-align: center;
   margin-top: 2rem;
 }
-
 .input-group {
   margin-bottom: 1.5rem;
 }
-
-input, select {
+input,
+select {
   padding: 10px;
   font-size: 1rem;
   width: 250px;
@@ -37,7 +33,6 @@ input, select {
   border: 1px solid #333;
 }
 
-/* Compare Button */
 .compare-button {
   padding: 10px 20px;
   font-size: 1.2rem;
@@ -46,33 +41,25 @@ input, select {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: 0.3s;
 }
-
 .compare-button:hover {
   background-color: #45a049;
 }
 
-/* Comparison Section */
 .comparison-section {
-  text-align: center;
   margin-top: 2rem;
 }
-
 .footprint-container {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 3rem;
   margin-top: 2rem;
-  position: relative;
 }
-
 .footprint {
   text-align: center;
   position: relative;
 }
-
 .circle {
   border-radius: 50%;
   transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
@@ -80,20 +67,57 @@ input, select {
   align-items: center;
   justify-content: center;
 }
-
 .user-circle {
   background-color: #ffcc00;
-  width: 50px;
-  height: 50px;
 }
-
 .company-circle {
   background-color: #444;
-  width: 50px;
-  height: 50px;
 }
 
-/* Reset Button */
+.pacman {
+  background-color: #444; /* or change to #ffcc00 for yellow */
+  border-radius: 50%;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  animation: chomping 0.5s ease-in-out infinite, movePacman 1s ease forwards;
+  clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+}
+
+@keyframes chomping {
+  0%, 100% {
+    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+  }
+  50% {
+    clip-path: circle(50%);
+  }
+}
+
+/* Pac-Man moves left toward the user */
+.pacman-move {
+  animation: chomping 0.5s ease-in-out infinite, movePacman 1s ease forwards;
+}
+
+@keyframes movePacman {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-130px); /* Adjust based on spacing */
+  }
+}
+
+/* Stop chomping after move */
+.pacman-stop {
+  animation: none;
+  clip-path: circle(50%);
+}
+
+.pacman-attack {
+  transition: transform 2s ease, opacity 1s ease;
+  opacity: 0;
+}
+
 .reset-button {
   margin-top: 1.5rem;
   padding: 10px 15px;
@@ -104,7 +128,6 @@ input, select {
   border-radius: 5px;
   cursor: pointer;
 }
-
 .reset-button:hover {
   background-color: #555;
 }

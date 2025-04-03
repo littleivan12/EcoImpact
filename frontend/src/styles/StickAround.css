@@ -56,7 +56,7 @@
   .degrade-img {
     width: 300px;
   }
-
+  
   /* Degradation Result */
   .degradation-result {
     margin-top: 2rem;
@@ -99,3 +99,35 @@
     border: 1px solid #333;
   }
   
+  .recycle-animation {
+    width: 350px;
+    margin-top: 10px;
+  }
+  
+  .flavor-text {
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: #555;
+  }
+  
+  .timeline-marker.end-marker {
+    background-color: red;
+    color: white;
+    border-radius: 4px;
+    padding: 2px 6px;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.9;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0.9;
+    }
+  }
