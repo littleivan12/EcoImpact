@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/FarmEmissions.css"; // New CSS file
+import BackButton from "../../components/BackButton.js";
+import TopBar from "../../components/TopBar.js";
+import Footer from "../../components/Footer.js";
 
 function FarmEmissions() {
   const [selectedSource, setSelectedSource] = useState(null);
@@ -40,70 +43,74 @@ function FarmEmissions() {
   };
 
   return (
-    <div className="farm-emissions-page">
-      {/* Go back to ground page*/}
-      <Link to="/ground" className="home-icon"></Link>
+    <div>
+      <TopBar hex1="#2bd634" hex2="#0b7e2c"/>
+      <div className="farm-emissions-page">
+        {/* Go back to ground page*/}
+        <BackButton pageType="ground"/>
 
-      <h1 className="page-title">Farm Emissions Showdown</h1>
+        <h1 className="page-title">Farm Emissions Showdown</h1>
 
-      <p className="description">
-        Click on a source below to see how its emissions grow.
-      </p>
+        <p className="description">
+          Click on a source below to see how its emissions grow.
+        </p>
 
-      {/* Emissions Bubble (Main Visualization) */}
-      <div className="emissions-bubble">
-        <div
-          className="gas-cloud cow-cloud"
-          style={{ width: `${gasSizes.cow}px`, height: `${gasSizes.cow}px` }}
-        >
-          🐄
-        </div>
-        <div
-          className="gas-cloud rice-cloud"
-          style={{ width: `${gasSizes.rice}px`, height: `${gasSizes.rice}px` }}
-        >
-          🌾
-        </div>
-        <div
-          className="gas-cloud industrial-cloud"
-          style={{
-            width: `${gasSizes.industrial}px`,
-            height: `${gasSizes.industrial}px`,
-          }}
-        >
-          🏭
-        </div>
-      </div>
-
-      {/* Clickable Sources */}
-      <div className="emission-sources">
-        {Object.keys(emissionsData).map((source) => (
-          <button
-            key={source}
-            className="emission-button"
-            onClick={() => handleClick(source)}
+        {/* Emissions Bubble (Main Visualization) */}
+        <div className="emissions-bubble">
+          <div
+            className="gas-cloud cow-cloud"
+            style={{ width: `${gasSizes.cow}px`, height: `${gasSizes.cow}px` }}
           >
-            {source === "cow"
-              ? "🐄 Cow"
-              : source === "rice"
-              ? "🌾 Rice"
-              : "🏭 Industrial"}
-          </button>
-        ))}
-      </div>
-
-      {/* Selected Info */}
-      {selectedSource && (
-        <div className="emission-info">
-          <h3>{emissionsData[selectedSource].name}</h3>
-          <p>{emissionsData[selectedSource].description}</p>
+            🐄
+          </div>
+          <div
+            className="gas-cloud rice-cloud"
+            style={{ width: `${gasSizes.rice}px`, height: `${gasSizes.rice}px` }}
+          >
+            🌾
+          </div>
+          <div
+            className="gas-cloud industrial-cloud"
+            style={{
+              width: `${gasSizes.industrial}px`,
+              height: `${gasSizes.industrial}px`,
+            }}
+          >
+            🏭
+          </div>
         </div>
-      )}
 
-      {/* Reset Button */}
-      <button className="reset-button" onClick={handleReset}>
-        Reset
-      </button>
+        {/* Clickable Sources */}
+        <div className="emission-sources">
+          {Object.keys(emissionsData).map((source) => (
+            <button
+              key={source}
+              className="emission-button"
+              onClick={() => handleClick(source)}
+            >
+              {source === "cow"
+                ? "🐄 Cow"
+                : source === "rice"
+                ? "🌾 Rice"
+                : "🏭 Industrial"}
+            </button>
+          ))}
+        </div>
+
+        {/* Selected Info */}
+        {selectedSource && (
+          <div className="emission-info">
+            <h3>{emissionsData[selectedSource].name}</h3>
+            <p>{emissionsData[selectedSource].description}</p>
+          </div>
+        )}
+
+        {/* Reset Button */}
+        <button className="reset-button" onClick={handleReset}>
+          Reset
+        </button>
+      </div>
+      <Footer />
     </div>
   );
 }

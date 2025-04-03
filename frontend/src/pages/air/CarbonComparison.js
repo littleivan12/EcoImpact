@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/CarbonComparison.css"; // Ensure this CSS file exists
+import BackButton from "../../components/BackButton.js";
+import TopBar from "../../components/TopBar.js";
+import Footer from "../../components/Footer.js";
 
 function CarbonComparison() {
   const [weeklyMiles, setWeeklyMiles] = useState(""); // User's weekly driving miles
@@ -89,106 +92,110 @@ function CarbonComparison() {
   };
 
   return (
-    <div className="carbon-page">
-      {/* Go back to air page*/}
-      <Link to="/air" className="home-icon"></Link>
+    <div>
+      <TopBar hex1="#f6e36a" hex2="#97840c"/>
+      <div className="carbon-page">
+        {/* Go back to air page*/}
+        <BackButton pageType="air"/>
 
-      <h1 className="page-title">Ecolmpact</h1>
-      <h2 className="section-title">Carbon Comparison</h2>
+        <h1 className="page-title">Ecolmpact</h1>
+        <h2 className="section-title">Carbon Comparison</h2>
 
-      {!showComparison ? (
-        <div className="input-section">
-          {/* User Mileage Input */}
-          <div className="input-group">
-            <label>Q1. How many miles do you drive per week? </label>
-            <input
-              type="number"
-              placeholder="Enter miles"
-              value={weeklyMiles}
-              onChange={(e) => setWeeklyMiles(e.target.value)}
-            />
-            <button className="calculate-button" onClick={handleCalculateEmissions}>
-              Calculate My CO₂ Emissions
+        {!showComparison ? (
+          <div className="input-section">
+            {/* User Mileage Input */}
+            <div className="input-group">
+              <label>Q1. How many miles do you drive per week? </label>
+              <input
+                type="number"
+                placeholder="Enter miles"
+                value={weeklyMiles}
+                onChange={(e) => setWeeklyMiles(e.target.value)}
+              />
+              <button className="calculate-button" onClick={handleCalculateEmissions}>
+                Calculate My CO₂ Emissions
+              </button>
+            </div>
+
+            {/* Show user's lifetime emissions */}
+            {userFootprint > 0 && (
+              <p>
+                Your estimated lifetime CO₂ emissions: <strong>{userFootprint} tons</strong>
+              </p>
+            )}
+
+            {/* Company Dropdown */}
+            <div className="input-group">
+              <label>What company would you like to compare to? </label>
+              <select
+                value={selectedCompany}
+                onChange={(e) => setSelectedCompany(e.target.value)}
+              >
+                <option value="">Select a company</option>
+                {companies.length > 0 ? (
+                  companies.map((company, index) => (
+                    <option key={`${company.name}-${index}`} value={company.name}>
+                      {company.name}
+                    </option>
+                  ))
+                ) : (
+                  <option disabled>Loading companies...</option>
+                )}
+              </select>
+            </div>
+
+            {/* Timeframe Selection */}
+            <div className="input-group">
+              <label>Compare against company's emissions for: </label>
+              <select
+                value={comparisonType}
+                onChange={(e) => setComparisonType(e.target.value)}
+              >
+                <option value="hourly">1 Hour</option>
+                <option value="daily">1 Day</option>
+              </select>
+            </div>
+
+            <button className="compare-button" onClick={handleCompare}>
+              Compare
             </button>
           </div>
-
-          {/* Show user's lifetime emissions */}
-          {userFootprint > 0 && (
-            <p>
-              Your estimated lifetime CO₂ emissions: <strong>{userFootprint} tons</strong>
-            </p>
-          )}
-
-          {/* Company Dropdown */}
-          <div className="input-group">
-            <label>What company would you like to compare to? </label>
-            <select
-              value={selectedCompany}
-              onChange={(e) => setSelectedCompany(e.target.value)}
-            >
-              <option value="">Select a company</option>
-              {companies.length > 0 ? (
-                companies.map((company, index) => (
-                  <option key={`${company.name}-${index}`} value={company.name}>
-                    {company.name}
-                  </option>
-                ))
-              ) : (
-                <option disabled>Loading companies...</option>
-              )}
-            </select>
-          </div>
-
-          {/* Timeframe Selection */}
-          <div className="input-group">
-            <label>Compare against company's emissions for: </label>
-            <select
-              value={comparisonType}
-              onChange={(e) => setComparisonType(e.target.value)}
-            >
-              <option value="hourly">1 Hour</option>
-              <option value="daily">1 Day</option>
-            </select>
-          </div>
-
-          <button className="compare-button" onClick={handleCompare}>
-            Compare
-          </button>
-        </div>
-      ) : (
-        <div className="comparison-section">
-          <h3>
-            Your lifetime footprint vs. {selectedCompany}'s **{comparisonType}** emissions
-          </h3>
-          <div className="footprint-container">
-            <div className="footprint">
-              <div
-                className="circle user-circle"
-                style={{
-                  width: `${userCircleSize}px`,
-                  height: `${userCircleSize}px`,
-                }}
-              ></div>
-              <p>You: {userFootprint} tons in your lifetime</p>
+        ) : (
+          <div className="comparison-section">
+            <h3>
+              Your lifetime footprint vs. {selectedCompany}'s **{comparisonType}** emissions
+            </h3>
+            <div className="footprint-container">
+              <div className="footprint">
+                <div
+                  className="circle user-circle"
+                  style={{
+                    width: `${userCircleSize}px`,
+                    height: `${userCircleSize}px`,
+                  }}
+                ></div>
+                <p>You: {userFootprint} tons in your lifetime</p>
+              </div>
+              <div className="footprint">
+                <div
+                  className="circle company-circle"
+                  style={{
+                    width: `${companyCircleSize}px`,
+                    height: `${companyCircleSize}px`,
+                  }}
+                ></div>
+                <p>
+                  {selectedCompany}: {companyEmissions.toFixed(2)} tons {comparisonType}
+                </p>
+              </div>
             </div>
-            <div className="footprint">
-              <div
-                className="circle company-circle"
-                style={{
-                  width: `${companyCircleSize}px`,
-                  height: `${companyCircleSize}px`,
-                }}
-              ></div>
-              <p>
-                {selectedCompany}: {companyEmissions.toFixed(2)} tons {comparisonType}
-              </p>
-            </div>
+            <button className="reset-button" onClick={() => setShowComparison(false)}>
+              Reset Comparison
+            </button>
           </div>
-          <button className="reset-button" onClick={() => setShowComparison(false)}>
-            Reset Comparison
-          </button>
-        </div>
-      )}
+        )}
+      </div>
+      <Footer />
     </div>
   );
 }

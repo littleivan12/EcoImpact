@@ -9,8 +9,8 @@ import CarbonComparison from "./pages/air/CarbonComparison.js";
 import PlasticOcean from "./pages/water/PlasticOcean.js";
 import FarmEmissions from "./pages/ground/FarmEmissions.js";
 import Selectbox from "./components/Selectbox.js";
-import Footer from "./components/Footer.js";
 import TopBar from "./components/TopBar.js";
+import Footer from "./components/Footer.js";
 
 
 function Home() {
@@ -37,6 +37,7 @@ function Home() {
           <Selectbox page="ground" label="Ground"/>
         </Link>
       </div>
+      <Footer />
     </div>
   );
 }
@@ -63,13 +64,8 @@ function Air() {
             <p className="coming-soon">See the biggest CO2 contributors</p>
           </Link>
         </div>
-        <Link
-          to="/"
-          className="bg-green-400 flex-1 flex items-center justify-right text-4xl font-bold hover:bg-green-500 transition text-white"
-        >
-          <Footer />
-        </Link>
       </div>
+      <Footer />
     </div>
   );
 }
@@ -100,13 +96,8 @@ function Water() {
             </p>
           </Link>
         </div>
-        <Link
-          to="/"
-          className="bg-green-400 flex-1 flex items-center justify-right text-4xl font-bold hover:bg-green-500 transition text-white"
-        >
-          <Footer />
-        </Link>
       </div>
+      <Footer />
     </div>
   );
 }
@@ -139,13 +130,8 @@ function Ground() {
             </p>
           </Link>
         </div>
-        <Link
-          to="/"
-          className="bg-green-400 flex-1 flex items-center justify-right text-4xl font-bold hover:bg-green-500 transition text-white"
-        >
-          <Footer />
-        </Link>
       </div>
+      <Footer />
     </div>
   );
 }

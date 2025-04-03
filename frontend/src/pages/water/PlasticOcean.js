@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/PlasticOcean.css"; // New CSS file
+import BackButton from "../../components/BackButton.js";
+import TopBar from "../../components/TopBar.js";
+import Footer from "../../components/Footer.js";
 
 function PlasticOcean() {
   const [year, setYear] = useState(2025);
@@ -16,40 +19,44 @@ function PlasticOcean() {
   };
 
   return (
-    <div className="plastic-ocean-page">
-      {/* Go back to water page*/}
-      <Link to="/water" className="home-icon"></Link>
+    <div>
+      <TopBar hex1="#4ebeee" hex2="#140b8d"/>
+      <div className="plastic-ocean-page">
+        {/* Go back to water page*/}
+        <BackButton pageType="water"/>
 
-      <h1 className="page-title">Plastic in the Ocean</h1>
+        <h1 className="page-title">Plastic in the Ocean</h1>
 
-      <p className="description">
-        By {year}, an estimated <strong>{plasticCoverage[year]}%</strong> of the
-        ocean could be plastic waste.
-      </p>
+        <p className="description">
+          By {year}, an estimated <strong>{plasticCoverage[year]}%</strong> of the
+          ocean could be plastic waste.
+        </p>
 
-      {/* Visual Representation */}
-      <div className="ocean-container">
-        <div className="ocean">
-          <div
-            className="plastic-overlay"
-            style={{ height: `${plasticCoverage[year] * 10}%` }}
-          ></div>
+        {/* Visual Representation */}
+        <div className="ocean-container">
+          <div className="ocean">
+            <div
+              className="plastic-overlay"
+              style={{ height: `${plasticCoverage[year] * 10}%` }}
+            ></div>
+          </div>
+        </div>
+
+        {/* Year Selection Slider */}
+        <div className="slider-container">
+          <input
+            type="range"
+            min="2025"
+            max="2070"
+            step="5"
+            value={year}
+            onChange={(e) => setYear(parseInt(e.target.value))}
+            className="slider"
+          />
+          <p>Year: {year}</p>
         </div>
       </div>
-
-      {/* Year Selection Slider */}
-      <div className="slider-container">
-        <input
-          type="range"
-          min="2025"
-          max="2070"
-          step="5"
-          value={year}
-          onChange={(e) => setYear(parseInt(e.target.value))}
-          className="slider"
-        />
-        <p>Year: {year}</p>
-      </div>
+      <Footer />
     </div>
   );
 }
