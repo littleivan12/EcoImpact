@@ -35,43 +35,44 @@ function IceSheets() {
   const [meltedSheets, setMeltedSheets] = useState(0);
 
   return (
-    <div className="ice-sheet-page">
+    <div>
       <TopBar hex1="#4ebeee" hex2="#140b8d" />
-      <BackButton pageType="water" />
-      <h1 className="page-title">EcoImpact</h1>
+      <div className="ice-sheet-page">
+        <BackButton pageType="water" />
+        <h1 className="page-title">EcoImpact</h1>
 
-      {/* Ice Sheet and Sea Level Visualization */}
-      <div className="visualization-container">
-        {/* Ice Sheet Melting Section */}
-        <div className="ice-sheet-section">
-          <img
-            src={`/visuals/water/sheets/sheet${meltedSheets}.png`}
-            alt={`Ice Sheet ${meltedSheets}`}
-            className="ice-sheet-img"
-          />
-          <div className="slider-container">
-            <input
-              type="range"
-              min="0"
-              max="10"
-              value={meltedSheets}
-              onChange={(e) => setMeltedSheets(parseInt(e.target.value))}
-              className="slider"
+        {/* Ice Sheet and Sea Level Visualization */}
+        <div className="visualization-container">
+          {/* Ice Sheet Melting Section */}
+          <div className="ice-sheet-section">
+            <img
+              src={`/visuals/water/sheets/sheet${meltedSheets}.png`}
+              alt={`Ice Sheet ${meltedSheets}`}
+              className="ice-sheet-img"
             />
-            <span className="slider-label">{meltedSheets} Ice Sheets Melted</span>
+            <div className="slider-container">
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value={meltedSheets}
+                onChange={(e) => setMeltedSheets(parseInt(e.target.value))}
+                className="slider"
+              />
+              <span className="slider-label">{meltedSheets} Ice Sheets Melted</span>
+            </div>
+          </div>
+
+          {/* Sea Level Change Section */}
+          <div className="sea-level-section">
+            <SeaLvlImage value={meltedSheets} />
+            <p className="sea-level-label">Current Sea Level</p>
           </div>
         </div>
 
-        {/* Sea Level Change Section */}
-        <div className="sea-level-section">
-          <SeaLvlImage value={meltedSheets} />
-          <p className="sea-level-label">Current Sea Level</p>
-        </div>
+        {/* Impact Information */}
+        <ImpactInfo value={meltedSheets} />
       </div>
-
-      {/* Impact Information */}
-      <ImpactInfo value={meltedSheets} />
-
       <Footer />
     </div>
   );

@@ -63,113 +63,115 @@ function PlasticOcean() {
   };
 
   return (
-    <div
+    <div>
+      <TopBar hex1="#4ebeee" hex2="#140b8d" />
+      <div
       className="plastic-ocean-page"
       style={{
         backgroundColor: countryImpact
           ? getRiskColor(countryImpact.coastal_waste_risk)
           : "#e0f7fa",
       }}
-    >
-      <TopBar hex1="#4ebeee" hex2="#140b8d" />
-      <BackButton pageType="water" />
+      >
+        <BackButton pageType="water" />
 
-      <h1 className="page-title">Plastic in the Ocean</h1>
+        <h1 className="page-title">Plastic in the Ocean</h1>
 
-      <p className="explanation">
-        Litter to see how plastic waste accumulates globally in the ocean over
-        time. Select a country to see its impact on coastal waste risk and
-        recycling rates.
-      </p>
+        <p className="explanation">
+          Litter to see how plastic waste accumulates globally in the ocean over
+          time. Select a country to see its impact on coastal waste risk and
+          recycling rates.
+        </p>
 
-      {/* Country Selector */}
-      <div className="selector-container">
-        <label htmlFor="country">
-          Choose a country{" "}
-          <span title="This shows regional impact only. It doesn't affect the plastic level.">
-            ❓
-          </span>
-        </label>
-        <select
-          id="country"
-          value={selectedCountry}
-          onChange={(e) => setSelectedCountry(e.target.value)}
-        >
-          {countryList.map((c) => (
-            <option key={c.code} value={c.code}>
-              {c.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {countryImpact && (
-        <div className="country-impact">
-          <p>
-            <strong>{countryImpact.country}</strong>
-          </p>
-          <p>
-            Coastal Waste Risk:{" "}
-            <strong>{countryImpact.coastal_waste_risk}</strong>
-          </p>
-          <p>
-            Recycling Rate: <strong>{countryImpact.recycling_rate}%</strong>
-          </p>
-          <p>
-            Per Capita Waste:{" "}
-            <strong>{countryImpact.per_capita_waste_kg}kg</strong>
-          </p>
+        {/* Country Selector */}
+        <div className="selector-container">
+          <label htmlFor="country">
+            Choose a country{" "}
+            <span title="This shows regional impact only. It doesn't affect the plastic level.">
+              ❓
+            </span>
+          </label>
+          <select
+            id="country"
+            value={selectedCountry}
+            onChange={(e) => setSelectedCountry(e.target.value)}
+          >
+            {countryList.map((c) => (
+              <option key={c.code} value={c.code}>
+                {c.name}
+              </option>
+            ))}
+          </select>
         </div>
-      )}
 
-      <p className="description">
-        By <strong>{year}</strong>, an estimated <strong>{coverage}%</strong> of
-        the ocean may be covered in plastic.
-      </p>
+        {countryImpact && (
+          <div className="country-impact">
+            <p>
+              <strong>{countryImpact.country}</strong>
+            </p>
+            <p>
+              Coastal Waste Risk:{" "}
+              <strong>{countryImpact.coastal_waste_risk}</strong>
+            </p>
+            <p>
+              Recycling Rate: <strong>{countryImpact.recycling_rate}%</strong>
+            </p>
+            <p>
+              Per Capita Waste:{" "}
+              <strong>{countryImpact.per_capita_waste_kg}kg</strong>
+            </p>
+          </div>
+        )}
 
-      {/* Visual Representation */}
-      <div className="ocean-container">
-        <div className="ocean">
-          <div
-            className="plastic-overlay"
-            style={{ height: `${coverage * 10}%` }}
-          ></div>
+        <p className="description">
+          By <strong>{year}</strong>, an estimated <strong>{coverage}%</strong> of
+          the ocean may be covered in plastic.
+        </p>
 
-          {/* Fish flee with more plastic */}
-          {Array.from({ length: Math.max(0, 5 - step) }).map((_, i) => (
-            <img
-              key={`fish-${i}`}
-              src="/visuals/water/fish/fish1.png"
-              alt="Fish"
-              className="swimming-fish"
-              style={{
-                left: `${10 + i * 15}%`,
-                bottom: `${10 + i * 5}%`,
-                animationDelay: `${i * 0.5}s`,
-              }}
-            />
-          ))}
+        {/* Visual Representation */}
+        <div className="ocean-container">
+          <div className="ocean">
+            <div
+              className="plastic-overlay"
+              style={{ height: `${coverage * 10}%` }}
+            ></div>
+
+            {/* Fish flee with more plastic */}
+            {Array.from({ length: Math.max(0, 5 - step) }).map((_, i) => (
+              <img
+                key={`fish-${i}`}
+                src="/visuals/water/fish/fish1.png"
+                alt="Fish"
+                className="swimming-fish"
+                style={{
+                  left: `${10 + i * 15}%`,
+                  bottom: `${10 + i * 5}%`,
+                  animationDelay: `${i * 0.5}s`,
+                }}
+              />
+            ))}
+          </div>
         </div>
+
+        <div className="button-group">
+          <button
+            className="litter-button"
+            onClick={handleClick}
+            disabled={step >= projections.length - 1}
+          >
+            🧴 Litter some plastic
+          </button>
+
+          <button className="reset-button" onClick={handleReset}>
+            🔄 Reset
+          </button>
+        </div>
+
+        <p className="impact-blurb">{impact}</p>
       </div>
-
-      <div className="button-group">
-        <button
-          className="litter-button"
-          onClick={handleClick}
-          disabled={step >= projections.length - 1}
-        >
-          🧴 Litter some plastic
-        </button>
-
-        <button className="reset-button" onClick={handleReset}>
-          🔄 Reset
-        </button>
-      </div>
-
-      <p className="impact-blurb">{impact}</p>
-
       <Footer />
     </div>
+    
   );
 }
 
