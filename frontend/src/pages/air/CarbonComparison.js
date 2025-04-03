@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/CarbonComparison.css"; // Ensure this CSS file exists
 import BackButton from "../../components/BackButton.js";
 import TopBar from "../../components/TopBar.js";
 import Footer from "../../components/Footer.js";
+
 
 function CarbonComparison() {
   const [weeklyMiles, setWeeklyMiles] = useState("");
@@ -183,7 +184,7 @@ function CarbonComparison() {
                 <p>
                   {selectedCompany}: {companyEmissions.toFixed(2)} tons
                 </p>
-              </div>
+              </div>  
             </div>
             <button
               className="reset-button"

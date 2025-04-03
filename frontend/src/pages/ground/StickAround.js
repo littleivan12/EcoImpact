@@ -40,7 +40,7 @@ function StickAround() {
   const [selectedMaterial, setSelectedMaterial] = useState("");
   const [recycled, setRecycled] = useState(false);
 
-  // Data: Degradation periods in years
+  // Degradation periods in years
   const degradationData = {
     "metal-cup": { years: 5000, degradesIn: "Year 3000+" },
     "plastic-cup": { years: 450, degradesIn: "Year 2450" },
