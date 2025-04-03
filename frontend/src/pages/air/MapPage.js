@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import "../../styles/MapPage.css";
 import worldMap from "../../assets/world-map-placeholder.png";
 import AirEffects from "../../components/AirEffects.js";
+import BackButton from "../../components/BackButton.js";
+import TopBar from "../../components/TopBar.js";
+import Footer from "../../components/Footer.js";
 
 function EffectNames({value, thresholds}){
   /* Modify threshold values for words here */
@@ -69,56 +72,60 @@ function MapPage() {
   };
 
   return (
-    <div className="map-page-container">
-      {/* Go back to air page*/}
-      <Link to="/air" className="home-icon"></Link>
+    <div>
+      <TopBar hex1="#f6e36a" hex2="#97840c"/>
+      <div className="map-page-container">
+        {/* Go back to air page*/}
+        <BackButton pageType="air"/>
 
-      <h1 className="map-title">National Impact</h1>
-      <p className="map-subtitle">Click a location to remove their emissions</p>
+        <h1 className="map-title">National Impact</h1>
+        <p className="map-subtitle">Click a location to remove their emissions</p>
 
-      {/* Flex container for Map & Environmental Effects */}
-      <div className="map-impact-container">
-        {/* Map Section */}
-        <div className="map-container">
-          <img src={worldMap} alt="World Map" className="world-map" />
-          <div className="country-buttons">
-            {countries.map((country) => (
-              <button
-                key={country.name}
-                className={`country-button ${
-                  selectedCountries[country.name] ? "selected" : "deselected"
-                }`}
-                onClick={() => deselectCountry(country.name)}
-              >
-                {country.name}
-              </button>
-            ))}
+        {/* Flex container for Map & Environmental Effects */}
+        <div className="map-impact-container">
+          {/* Map Section */}
+          <div className="map-container">
+            <img src={worldMap} alt="World Map" className="world-map" />
+            <div className="country-buttons">
+              {countries.map((country) => (
+                <button
+                  key={country.name}
+                  className={`country-button ${
+                    selectedCountries[country.name] ? "selected" : "deselected"
+                  }`}
+                  onClick={() => deselectCountry(country.name)}
+                >
+                  {country.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Environmental Effects Section */}
+          <div className="effects-container">
+            <h2>Environmental Impact</h2>
+            <div className="effects-placeholder">
+              <AirEffects value={totalEmissions} set={limitArr}/>
+            </div>
+            <EffectNames value={totalEmissions} thresholds={limitArr}/>
           </div>
         </div>
 
-        {/* Environmental Effects Section */}
-        <div className="effects-container">
-          <h2>Environmental Impact</h2>
-          <div className="effects-placeholder">
-            <AirEffects value={totalEmissions} set={limitArr}/>
+        {/* CO2 Levels Section */}
+        <div className="co2-container">
+          <h2>CO₂ Levels in 50 Years</h2>
+          <div className="co2-bar">
+            <div
+              className="co2-progress"
+              style={{
+                width: `${(totalEmissions / totalInitialEmissions) * 100}%`,
+              }}
+            ></div>
           </div>
-          <EffectNames value={totalEmissions} thresholds={limitArr}/>
+          <p>{totalEmissions.toLocaleString()} million metric tons</p>
         </div>
       </div>
-
-      {/* CO2 Levels Section */}
-      <div className="co2-container">
-        <h2>CO₂ Levels in 50 Years</h2>
-        <div className="co2-bar">
-          <div
-            className="co2-progress"
-            style={{
-              width: `${(totalEmissions / totalInitialEmissions) * 100}%`,
-            }}
-          ></div>
-        </div>
-        <p>{totalEmissions.toLocaleString()} million metric tons</p>
-      </div>
+      <Footer />
     </div>
   );
 }

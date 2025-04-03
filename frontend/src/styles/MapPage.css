@@ -3,6 +3,7 @@
     padding: 2rem;
     background-color: #f8f9fa;
     min-height: 100vh;
+    position: relative;
   }
   
   /* Title and Subtitle */
@@ -154,22 +155,3 @@
   .back-button:hover {
     background-color: #555;
   }
-
-  /* Home Icon Button (Top Left) */
-.home-icon {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 40px; /* Placeholder square */
-    height: 40px;
-    background-color: #333; /* Dark color for now */
-    border-radius: 5px;
-    display: inline-block;
-    transition: background 0.3s;
-  }
-  
-  .home-icon:hover {
-    background-color: #555; /* Slightly lighter on hover */
-  }
-  
-  

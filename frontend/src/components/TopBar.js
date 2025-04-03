@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import "./TopBar.css";
 
 function TopBar({hex1, hex2}){
@@ -13,7 +14,9 @@ function TopBar({hex1, hex2}){
             }}
         >
             <div className="logo">
-                <p>EcoImpact</p>
+                <Link to="/" >
+                    <p>EcoImpact</p>
+                </Link>
             </div>
         </div>
     )
