@@ -10,7 +10,6 @@
 
 .logo {
     padding-left: 20px;
-    font-weight: bold;
-    font-size: 70px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    height: 100px;
+    filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.5));
 }
