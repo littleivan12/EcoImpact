@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import "./TopBar.css";
 
 function TopBar({hex1, hex2}){
-    const [color1, setColor1] = useState(hex1);
-    const [color2, setColor2] = useState(hex2);
+    const [color1] = useState(hex1);
+    const [color2] = useState(hex2);
     
     return(
         <div
@@ -15,7 +15,7 @@ function TopBar({hex1, hex2}){
         >
             <div className="logo">
                 <Link to="/" >
-                    <p>EcoImpact</p>
+                    <img src={"./visuals/name.png"} alt="logo" className={"logo"}/>
                 </Link>
             </div>
         </div>

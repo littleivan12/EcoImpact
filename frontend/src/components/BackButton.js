@@ -6,7 +6,9 @@ function BackButton({pageType}){
     const page = `/${pageType}`
 
     return(
-        <Link to={page} className="home-icon">Go Back</Link>
+        <Link to={page} className="home-icon">
+            <img src={"./visuals/arrow.png"} alt="back" className={"home-img"} />
+        </Link>
     );
 }
 
