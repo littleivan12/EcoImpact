@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import * as topojson from "topojson-client";
 import * as d3 from "d3";
 import "../../styles/MapPage.css"; // Assuming we are adding custom styles
