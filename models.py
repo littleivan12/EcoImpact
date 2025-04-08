@@ -15,6 +15,7 @@ class AirSuper(Base):
     flaring = Column(Float, nullable=False)
     other = Column(Float, nullable=False)
     per_capita = Column(Float, nullable=False)
+    number_code = Column(Integer, nullable=False)
 class ObjectDegradation(Base):
     __tablename__ = "object_degradation"
 
