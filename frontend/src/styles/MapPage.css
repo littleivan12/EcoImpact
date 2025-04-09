@@ -1,157 +1,259 @@
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+/* Map Page Container */
 .map-page-container {
-    text-align: center;
-    padding: 2rem;
-    background-color: #f8f9fa;
-    min-height: 100vh;
-    position: relative;
-  }
-  
-  /* Title and Subtitle */
-  .map-title {
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-  
-  .map-subtitle {
-    font-size: 1.5rem;
-    color: #555;
-    margin-bottom: 2rem;
-  }
-  
-  /* Map & Impact Container - Places them side by side */
-  .map-impact-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-    margin-bottom: 2rem;
-  }
-  
-  /* Map Section */
-  .map-container {
-    position: relative;
-    max-width: 50%;
-  }
-  
-  .world-map {
-    width: 100%;
-    max-width: 500px;
-    border: 2px solid #333;
-    border-radius: 10px;
-  }
-  
-  .country-buttons {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 1rem;
-  }
-  
-  .country-button {
-    margin: 5px;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: background 0.3s;
-  }
-  
-  .selected {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  .deselected {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  /* Environmental Effects - Positioned to the Right of the Map */
-  .effects-container {
-    width: 300px;
-    text-align: center;
-  }
-  
-  .effects-placeholder {
-    width: 100%;
-    height: 200px;
-    background-color: #ccc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    color: #333;
-    border-radius: 10px;
-  }
-  
-  .effect-container {
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    position: relative;
-    padding: 10px;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .effect-word {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    margin-bottom: 10px;
-  }
+  text-align: center;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
 
-  .effect-word.show {
-    opacity: 1;
-  }
+/* Title and Subtitle */
+.map-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
 
-  .effect-word:nth-child(1) {
-    transition-delay: 0s;
-  }
-  .effect-word:nth-child(2) {
-    transition-delay: 0.1s;
-  }
-  .effect-word:nth-child(3) {
-    transition-delay: 0.2s;
-  }
+.map-subtitle {
+  font-size: 1.5rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
 
-  /* CO2 Bar */
-  .co2-container {
-    margin-top: 2rem;
-  }
+/* Map & Impact Container - Places them side by side */
+.map-impact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+/* Map Section */
+.map-container {
+  position:absolute;
+  max-width: 100%;
+  overflow-y: auto;
+  transform: scale();
+
+}
+
+.world-map {
+  width: 800%;
+  max-width: 500px;
+  border: 2px solid #333;
+  border-radius: 10px;
+}
+
+/* Country Buttons */
+.country-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.country-button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.selected {
+  background-color: #a74a28;
+  color: white;
+}
+
+.deselected {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Environmental Effects - Positioned to the Right of the Map */
+.effects-container {
+  width: 300px;
+  text-align: center;
+}
+
+.effects-placeholder {
+  width: 100%;
+  height: 200px;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #333;
+  border-radius: 10px;
+}
+
+/* CO2 Bar */
+.co2-container {
+  margin-top: 2rem;
+}
+
+.co2-bar {
+  width: 10%;
+  max-width: 20px;
+  height: 20px;
+  background-color: #ddd;
+  border-radius: 10px;
+  margin: 1rem auto;
+  overflow: hidden;
+}
+
+.co2-progress {
+  height: 100%;
+  background-color: #007bff;
+  transition: width 0.5s ease-in-out;
+}
+
+/* Back Button */
+.back-button {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.back-button:hover {
+  background-color: #555;
+}
+
+/* Home Icon Button (Top Left) */
+.home-icon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px; /* Placeholder square */
+  height: 40px;
+  background-color: #333; /* Dark color for now */
+  border-radius: 5px;
+  display: inline-block;
+  transition: background 0.3s;
+}
+
+.home-icon:hover {
+  background-color: #555; /* Slightly lighter on hover */
+}
+.info-box {
+  position: absolute;
+  top: 32%;
+  right: 20px;
+  width: 400px;  /* Increase width */
+  height: 700px\\; /* Set a fixed height or use min-height */
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;  /* Adjust padding if needed */
+  border-radius: 10px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  transition: all 0.3s ease-in-out;
+  overflow-y: auto; /* Add scrollbar when content exceeds height */
+}
+
+.info-box2 {
+  position: absolute;
+  top: 32%;
+  right: 20px;
+  width: 300px;  /* Increase width */
+  height: auto; /* Set a fixed height or use min-height */
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;  /* Adjust padding if needed */
+  border-radius: 10px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  transition: all 0.3s ease-in-out;
+  overflow-y: auto; /* Add scrollbar when content exceeds height */
+}
+
+.info-box h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 10px;
   
-  .co2-bar {
+}
+
+.info-box p {
+  font-size: 14px;
+  margin: 5px 0;
+  color: #555;
+  overflow-y: auto; 
+}
+
+#co2-graph {
+  width: 100%;
+  height: 80%;
+}
+
+@media (max-width: 768px) {
+  .info-box {
     width: 80%;
-    max-width: 600px;
-    height: 20px;
-    background-color: #ddd;
-    border-radius: 10px;
-    margin: 1rem auto;
-    overflow: hidden;
+    right: 5%;
+    top: 10%;
   }
-  
-  .co2-progress {
-    height: 100%;
-    background-color: #007bff;
-    transition: width 0.5s ease-in-out;
-  }
-  
-  /* Back Button */
-  .back-button {
-    display: inline-block;
-    margin-top: 2rem;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    color: white;
-    background-color: #333;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background 0.3s;
-  }
-  
-  .back-button:hover {
-    background-color: #555;
-  }
+}
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #333;
+}
+
+.close-btn:hover {
+  color: red;
+}
+#map {
+  width: 100%;
+  height: 100vh;  /* 100% of the viewport height */
+}
+
+
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; 
+  /* Prevents scrolling if it's not needed */
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+svg {
+ /* Ensures that the SVG doesn't have extra margins */
+  width: 100%;
+  height: 100%;
+}
+
+#mapWrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+}
