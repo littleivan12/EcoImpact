@@ -92,7 +92,7 @@ const AirDataMap = () => {
           const height = mapContainer.clientHeight || window.innerHeight;
   
           const projection = d3.geoNaturalEarth1()
-            .scale(400)
+            .scale(300)
             .translate([width / 2, height / 2]);
   
           const pathGenerator = d3.geoPath().projection(projection);
