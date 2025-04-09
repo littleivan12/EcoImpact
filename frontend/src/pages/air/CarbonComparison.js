@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/CarbonComparison.css"; // Ensure this CSS file exists
 import BackButton from "../../components/BackButton.js";
@@ -17,6 +17,7 @@ function CarbonComparison() {
   const [companyCircleSize, setCompanyCircleSize] = useState(0);
   const [comparisonType, setComparisonType] = useState("hourly");
   const [hasEaten, setHasEaten] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/companies/")
@@ -28,17 +29,32 @@ function CarbonComparison() {
           hourlyEmissions: company.daily_emissions / 24,
         }));
         setCompanies(formatted);
-      });
+      })
+      .catch(() => setError("Failed to fetch company data. Please try again later."));
   }, []);
 
   const handleCalculateEmissions = () => {
-    if (!weeklyMiles || isNaN(weeklyMiles) || weeklyMiles <= 0) return;
+    setError(""); // Clear any previous errors
+    if (!weeklyMiles || isNaN(weeklyMiles) || weeklyMiles <= 0) {
+      setError("Please enter a valid number of weekly miles (greater than 0).");
+      return;
+    }
     const yearlyMiles = weeklyMiles * 52;
     const emissions = yearlyMiles * 0.404 * 50;
     setUserFootprint(emissions.toFixed(2));
   };
 
   const handleCompare = () => {
+    setError(""); // Clear any previous errors
+    if (!userFootprint || userFootprint <= 0) {
+      setError("Please calculate your emissions before comparing.");
+      return;
+    }
+    if (!selectedCompany) {
+      setError("Please select a company to compare against.");
+      return;
+    }
+
     const selectedCompanyData = companies.find(
       (c) => c.name === selectedCompany
     );
@@ -93,6 +109,8 @@ function CarbonComparison() {
 
         <h1 className="page-title">Ecolmpact</h1>
         <h2 className="section-title">Carbon Comparison</h2>
+
+        {error && <p className="error-message">{error}</p>}
 
         {!showComparison ? (
           <div className="input-section">

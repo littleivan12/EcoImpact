@@ -4,9 +4,11 @@
 /node_modules
 /.pnp
 .pnp.js
+node_modules
 
 # testing
 /coverage
+tst.py
 
 # production
 /build
@@ -21,3 +23,5 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+migrate_mysql_to_postgres.py
