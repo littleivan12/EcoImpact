@@ -238,7 +238,6 @@ const handleViewToggle = () => {
   setViewMode(viewMode === "map" ? "country" : "map");
 };
 
-
 const resetMap = () => {
   setRemovedCountries(new Set()); // Reset the removed countries state
 
@@ -268,9 +267,6 @@ const resetMap = () => {
 
     setTotalEmissions(GLOBAL_CO2_TOTAL);
 };
-
-
-
 
 const renderProgressBar = () => {
   // Calculate the percentage of emissions based on the current total emissions
@@ -335,47 +331,49 @@ const updateEmissionsOnSelection = (countryEmissions) => {
   });
 };
 
-
   // HTML PORTION 
   return (
-    <div className="container">
+    <div>
       <TopBar hex1="#f6e36a" hex2="#97840c"/>
-      <h1 className="title">CO₂ Emissions Map</h1>
+      <div className="container">
+        <BackButton pageType="air"/>
+        <h1 className="title">CO₂ Emissions Map</h1>
 
-      <button onClick={handleViewToggle}>
-        {viewMode === "map" ? "Country Data" : "Toggle Map"}
-      </button>
+        <button onClick={handleViewToggle}>
+          {viewMode === "map" ? "Country Data" : "Toggle Map"}
+        </button>
 
-      <button onClick={resetMap}>
-        RESET MAP
-      </button>
+        <button onClick={resetMap}>
+          RESET MAP
+        </button>
 
-      {/*  View */}
-<div id="map" className={viewMode === "map" ? "map-container" : "map-container" }></div>
-{/* Country View */}
-{selectedCountry && viewMode === "country" && (
-  <div className="info-box">
-  <button className="close-btn" onClick={() => setSelectedCountry(null)}>✖</button>
-  <h2>{selectedCountry.country}</h2>
-  <p><strong>Total Emissions:</strong> {selectedCountry.total} million metric tons</p>
-  <p><strong>Coal:</strong> {selectedCountry.coal}</p>
-  <p><strong>Oil:</strong> {selectedCountry.oil}</p>
-  <p><strong>Gas:</strong> {selectedCountry.gas}</p>
-  <p><strong>Cement:</strong> {selectedCountry.cement}</p>
-  <p><strong>Flaring:</strong> {selectedCountry.flaring}</p>
-  <p><strong>Per Capita:</strong> {selectedCountry.per_capita}</p>
-  <h2>Total CO₂ Emissions History</h2>
-  <svg id="co2-graph"></svg>
-</div>
-)}
-
-      {selectedCountry && viewMode === "map" && (
-        <div className="info-box2">
+        {/*  View */}
+        <div id="map" className={viewMode === "map" ? "map-container" : "map-container" }></div>
+        {/* Country View */}
+        {selectedCountry && viewMode === "country" && (
+        <div className="info-box">
+          <button className="close-btn" onClick={() => setSelectedCountry(null)}>✖</button>
           <h2>{selectedCountry.country}</h2>
-          {/* Emissions Bar in Country View */}
-          {viewMode === "map" && renderProgressBar()}
+          <p><strong>Total Emissions:</strong> {selectedCountry.total} million metric tons</p>
+          <p><strong>Coal:</strong> {selectedCountry.coal}</p>
+          <p><strong>Oil:</strong> {selectedCountry.oil}</p>
+          <p><strong>Gas:</strong> {selectedCountry.gas}</p>
+          <p><strong>Cement:</strong> {selectedCountry.cement}</p>
+          <p><strong>Flaring:</strong> {selectedCountry.flaring}</p>
+          <p><strong>Per Capita:</strong> {selectedCountry.per_capita}</p>
+          <h2>Total CO₂ Emissions History</h2>
+          <svg id="co2-graph"></svg>
         </div>
-      )}
+        )}
+
+        {selectedCountry && viewMode === "map" && (
+          <div className="info-box2">
+            <h2>{selectedCountry.country}</h2>
+            {/* Emissions Bar in Country View */}
+            {viewMode === "map" && renderProgressBar()}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

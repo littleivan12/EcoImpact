@@ -19,6 +19,7 @@ body {
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .map-subtitle {
@@ -38,7 +39,7 @@ body {
 
 /* Map Section */
 .map-container {
-  position:absolute;
+  position: relative;
   max-width: 100%;
   overflow-y: auto;
   transform: scale();
@@ -170,17 +171,16 @@ body {
 }
 
 .info-box2 {
-  position: absolute;
-  top: 32%;
-  right: 20px;
-  width: 300px;  /* Increase width */
+  position: relative;
+  padding: 1rem;
+  margin: 1rem;
+  max-width: 600px;  /* Increase width */
   height: auto; /* Set a fixed height or use min-height */
   background: rgba(255, 255, 255, 0.9);
-  padding: 20px;  /* Adjust padding if needed */
   border-radius: 10px;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
-  z-index: 100;
+  z-index: 10;
   transition: all 0.3s ease-in-out;
   overflow-y: auto; /* Add scrollbar when content exceeds height */
 }
@@ -193,15 +193,26 @@ body {
 }
 
 .info-box p {
-  font-size: 14px;
-  margin: 5px 0;
-  color: #555;
-  overflow-y: auto; 
+  position: absolute;
+  top: 32%;
+  right: 20px;
+  width: 400px;
+  height: 700px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  transition: all 0.3s ease-in-out;
+  overflow-y: auto;
 }
 
 #co2-graph {
   width: 100%;
-  height: 80%;
+  height: 250px;
+  display: block;
+  margin-top: 1rem;
 }
 
 @media (max-width: 768px) {
@@ -244,12 +255,16 @@ body, html {
 .container {
   width: 100%;
   height: 100%;
+  margin: 20px;
+  position: relative;
 }
 
 svg {
  /* Ensures that the SVG doesn't have extra margins */
   width: 100%;
   height: 100%;
+  scale: 75%;
+  display: block;
 }
 
 #mapWrapper {
