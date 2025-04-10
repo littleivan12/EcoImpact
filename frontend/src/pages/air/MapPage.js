@@ -374,6 +374,7 @@ const updateEmissionsOnSelection = (countryEmissions) => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };
