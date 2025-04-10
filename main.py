@@ -39,7 +39,7 @@ def get_db():
 class AirSuperBase(BaseModel):
     country: str
     country_code: str
-    Year: int
+    year: int
     total: float
     coal: float
     oil: float

@@ -4,6 +4,10 @@ import * as topojson from "topojson-client";
 import * as d3 from "d3";
 import "../../styles/MapPage.css"; // Assuming we are adding custom styles
 import _ from 'lodash';
+import BackButton from "../../components/BackButton.js";
+import TopBar from "../../components/TopBar.js";
+import Footer from "../../components/Footer.js";
+
 const AirDataMap = () => {
   // State Management
   const [data, setData] = useState([]);
@@ -156,15 +160,16 @@ const AirDataMap = () => {
               const countryData = countryDataMap[countryCode];
             
               if (viewMode === "country") {
-                // ✅ Just show data, do NOT modify map interaction
+                // Show data for the selected country
                 setSelectedCountry(countryData || { country: "Unknown", total: 0 });
             
                 if (countryData) {
                   fetch(`http://127.0.0.1:8000/air_super/${countryCode}/past_five_years`)
                     .then((response) => response.json())
                     .then((history) => {
+                      // Ensure the Year property is consistently set
                       const lastFiveYears = history.map((d) => ({
-                        Year: d.Year,
+                        Year: d.Year || d.year,  // Use either, whichever is defined
                         total: d.total,
                       }));
                       setCo2History(lastFiveYears);
@@ -172,14 +177,14 @@ const AirDataMap = () => {
                     });
                 }
             
-                // Optional: add a visual indication
-                d3.selectAll("path").attr("stroke-width", 0.5); // reset highlight
+                // Optional: add visual indication
+                d3.selectAll("path").attr("stroke-width", 0.5); // reset highlights
                 d3.select(event.currentTarget)
                   .transition()
                   .duration(300)
                   .attr("stroke-width", 2);
-            
-                return; // exit early!
+                
+                return; // exit early when in country view
               }
             
               // 🔁 Map interaction mode
@@ -203,7 +208,7 @@ const AirDataMap = () => {
                   .then((response) => response.json())
                   .then((history) => {
                     const lastFiveYears = history.map((d) => ({
-                      Year: d.Year,
+                      Year: d.year,
                       total: d.total,
                     }));
                     setCo2History(lastFiveYears);
@@ -334,6 +339,7 @@ const updateEmissionsOnSelection = (countryEmissions) => {
   // HTML PORTION 
   return (
     <div className="container">
+      <TopBar hex1="#f6e36a" hex2="#97840c"/>
       <h1 className="title">CO₂ Emissions Map</h1>
 
       <button onClick={handleViewToggle}>
