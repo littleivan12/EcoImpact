@@ -4,7 +4,6 @@ import "../../styles/StickAround.css"; // Updated styles
 import BackButton from "../../components/BackButton.js";
 import TopBar from "../../components/TopBar.js";
 import Footer from "../../components/Footer.js";
-import recycleGif from "../../assets/recycle.gif";
 
 function CupType({ type }) {
   if (type === "biodegradable-cup") {
@@ -188,11 +187,15 @@ function StickAround() {
             {/* Recycling animation for metal cup */}
             <br />
             {recycled && (
-              <img
-                src={recycleGif}
-                alt="Recycling Animation: https://hojassobrelaalmohada.blogspot.com/"
+              <video
                 className="recycle-animation"
-              />
+                autoPlay
+                loop
+                muted
+              >
+                <source src="/visuals/ground/cups/recycle.webm" type="video/webm" />
+                Your browser does not support the video tag.
+              </video>
             )}
           </div>
         )}
