@@ -6,7 +6,7 @@ class AirSuper(Base):
 
     country = Column(String(255))
     country_code = Column(String(255))
-    Year = Column(Integer, primary_key=True)
+    year = Column(Integer, primary_key=True)
     total = Column(Float, nullable=False)
     coal = Column(Float, nullable=False)
     oil = Column(Float, nullable=False)
