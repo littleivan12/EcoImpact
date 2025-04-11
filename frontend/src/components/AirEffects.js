@@ -3,7 +3,7 @@ import "./AirEffects.css";
 
 function AirEffects({value, set}){
     const [thresholds, setThresholds] = useState(set);
-    const [isSlidingIn, setIsSlidingIn] = useState([false, false, false]);
+    const [isSlidingIn, setIsSlidingIn] = useState([false, false, false, false]);
 
     useEffect(() => {
         setIsSlidingIn(thresholds.map(threshold => value > threshold));
@@ -11,18 +11,24 @@ function AirEffects({value, set}){
 
     return(
         <div className="img-container">
-            {thresholds.map((threshold,index) => (
+            <div className="img-row">
+                {thresholds.map((threshold, index) => (
                 <img
                     key={index}
                     className={isSlidingIn[index] ? 'slide-in' : 'slide-out'}
                     src={`/visuals/air/conditions/conditions_${index}.png`}
                     alt={`img ${index}`}
-                    style={{ transform: `translateX(${index * 75}px)` }}
+                    style={{
+                    transform: isSlidingIn[index]
+                        ? 'translateX(0)'
+                        : `translateX(${(index - thresholds.length / 2) * 100}px)`,
+                    opacity: isSlidingIn[index] ? 1 : 0,
+                    zIndex: index, // stack order
+                    }}
                 />
-            ))}   
+                ))}
+            </div>
         </div>
-
-        
     );
 }
 
