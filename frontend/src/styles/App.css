@@ -95,7 +95,7 @@ body, html {
 
 /* Page and Card Styling */
 .page-container {
-  height: 1000px;
+  height: 100%;
   gap: 2rem;
   flex-wrap: wrap;
   align-items: center;
@@ -123,6 +123,7 @@ body, html {
 
 .info-card {
   width: 300px;
+  height: 350px;
   padding: 2rem;
   background: white;
   border-radius: 20px;
@@ -153,6 +154,7 @@ body, html {
 .map-icon {
   font-size: 5rem;
   margin: 1rem 0;
+  width: 50%;
   color: #4a4a4a;
 }
 

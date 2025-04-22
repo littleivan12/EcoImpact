@@ -7,8 +7,42 @@ import _ from 'lodash';
 import BackButton from "../../components/BackButton.js";
 import TopBar from "../../components/TopBar.js";
 import Footer from "../../components/Footer.js";
+import AirEffects from "../../components/AirEffects.js";
+
+function EffectNames({value, thresholds}){
+  /* Modify threshold values for words here */
+  const [effectWords, setEffectWords] = useState([]);
+  
+  useEffect(() => {
+    let newWords = [];
+
+    if (value > thresholds[0]) newWords.push("Heavy Haze");
+    if (value > thresholds[1]) newWords.push("Acid Rain");
+    if (value > thresholds[2]) newWords.push("Plant Death");
+    if (value > thresholds[3]) newWords.push("Animal Death");
+
+    setEffectWords(newWords);
+
+  }, [value]);
+
+  return (
+    <div className="effect-container">
+      {effectWords.map((word, index) => (
+        <div
+          key={index}
+          className={`effect-word ${effectWords.includes(word) ? 'show' : ''}`}
+        >
+          {word}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 const AirDataMap = () => {
+  /* Change Environment Impact thresholds here */
+  const limitArr = [15000, 30000, 45000, 50000];
+
   // State Management
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,8 +60,7 @@ const AirDataMap = () => {
 
   // Line Graph for Country Data Rendering Function
   function renderGraph(data) {
-    const width = 500, height = 300, margin = { top: 30, right: 30, bottom: 30, left: 50 };
-
+    const width = 500, height = 300, margin = { top: 0, right: 0, bottom: 0, left: 0 };
 
     const svg = d3.select("#co2-graph")
         .attr("width", width)
@@ -231,8 +264,6 @@ const AirDataMap = () => {
     };
   }, [data, removedCountries]);
   
-  
-  
 // Toggle between map and country view
 const handleViewToggle = () => {
   setViewMode(viewMode === "map" ? "country" : "map");
@@ -339,14 +370,6 @@ const updateEmissionsOnSelection = (countryEmissions) => {
         <BackButton pageType="air"/>
         <h1 className="title">CO₂ Emissions Map</h1>
 
-        <button onClick={handleViewToggle}>
-          {viewMode === "map" ? "Country Data" : "Toggle Map"}
-        </button>
-
-        <button onClick={resetMap}>
-          RESET MAP
-        </button>
-
         {/*  View */}
         <div id="map" className={viewMode === "map" ? "map-container" : "map-container" }></div>
         {/* Country View */}
@@ -373,6 +396,22 @@ const updateEmissionsOnSelection = (countryEmissions) => {
             {viewMode === "map" && renderProgressBar()}
           </div>
         )}
+
+        <button onClick={handleViewToggle} className="map-buttons">
+          {viewMode === "map" ? "Country Data" : "Toggle Map"}
+        </button>
+
+        <button onClick={resetMap} className="map-buttons">
+          RESET MAP
+        </button>
+
+        <div className="effects-container">
+          <h2 className="title">Long-Term Effects</h2>
+          <div className="effects">
+            <AirEffects value={totalEmissions} set={limitArr}/>
+          </div>
+          <EffectNames value={totalEmissions} thresholds={limitArr}/>
+        </div>
       </div>
       <Footer />
     </div>
