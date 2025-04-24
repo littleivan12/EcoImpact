@@ -8,6 +8,9 @@ import Footer from "../../components/Footer.js";
 
 function CarbonComparison() {
   const [weeklyMiles, setWeeklyMiles] = useState("");
+  // Rough proxy for household electricity use
+  const [monthlyBill, setMonthlyBill] = useState("");            // average $/month electric bill
+  const [flightsPerYear, setFlightsPerYear] = useState("");        // number of flights
   const [userFootprint, setUserFootprint] = useState(0);
   const [companies, setCompanies] = useState([]);
   const [selectedCompany, setSelectedCompany] = useState("");
@@ -35,13 +38,32 @@ function CarbonComparison() {
 
   const handleCalculateEmissions = () => {
     setError(""); // Clear any previous errors
-    if (!weeklyMiles || isNaN(weeklyMiles) || weeklyMiles <= 0) {
-      setError("Please enter a valid number of weekly miles (greater than 0).");
+
+    // Basic validation — all three questions must have positive numeric answers
+    if (
+      !weeklyMiles || isNaN(weeklyMiles) || weeklyMiles <= 0 ||
+      !monthlyBill || isNaN(monthlyBill) || monthlyBill < 0 ||
+      flightsPerYear === "" || isNaN(flightsPerYear) || flightsPerYear < 0
+    ) {
+      setError("Please enter valid (positive) numbers for all questions.");
       return;
     }
-    const yearlyMiles = weeklyMiles * 52;
-    const emissions = yearlyMiles * 0.404 * 50;
-    setUserFootprint(emissions.toFixed(2));
+
+    const lifetimeYears = 50; // assumed driving / lifestyle span
+
+    // ---- Annual emissions calculations ----
+    const yearlyMiles = parseFloat(weeklyMiles) * 52;
+    const drivingAnnual = yearlyMiles * 0.404;                  // ton CO₂ per mile
+
+    // Approximate kWh from bill: average US cost ≈ $0.15 per kWh
+    const yearlyKwh = (parseFloat(monthlyBill) / 0.15) * 12;
+    const electricityAnnual = yearlyKwh * 0.00092;              // ton CO₂ per kWh (0.92 kg)
+
+    const flightsAnnual = parseFloat(flightsPerYear) * 0.45;    // ton CO₂ per short‑haul flight
+
+    const totalLifetime = (drivingAnnual + electricityAnnual + flightsAnnual) * lifetimeYears;
+
+    setUserFootprint(totalLifetime.toFixed(2));
   };
 
   const handleCompare = () => {
@@ -122,13 +144,35 @@ function CarbonComparison() {
                 value={weeklyMiles}
                 onChange={(e) => setWeeklyMiles(e.target.value)}
               />
-              <button
-                className="calculate-button"
-                onClick={handleCalculateEmissions}
-              >
-                Calculate My CO₂ Emissions
-              </button>
             </div>
+
+            <div className="input-group">
+              <label>Q2. About how much is your electric bill per month (USD)?</label>
+              <input
+                type="number"
+                placeholder="Enter $ amount"
+                value={monthlyBill}
+                onChange={(e) => setMonthlyBill(e.target.value)}
+              />
+            </div>
+
+            <div className="input-group">
+              <label>Q3. How many short flights (&lt;3 h) do you take per year?</label>
+              <input
+                type="number"
+                placeholder="Enter number of flights"
+                value={flightsPerYear}
+                onChange={(e) => setFlightsPerYear(e.target.value)}
+              />
+            </div>
+
+            {/* Calculate button (restored) */}
+            <button
+              className="calculate-button"
+              onClick={handleCalculateEmissions}
+            >
+              Calculate My CO₂ Emissions
+            </button>
 
             {userFootprint > 0 && (
               <p>
@@ -224,6 +268,3 @@ function CarbonComparison() {
 }
 
 export default CarbonComparison;
-
-
-
