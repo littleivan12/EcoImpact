@@ -42,8 +42,9 @@
 }
 
 .slider-label {
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0072ff;  /* brighter blue */
 }
 
 /* Sea Level Section */
@@ -56,8 +57,66 @@
 }
 
 .sea-level-label {
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #28a745;  /* vivid green */
   margin-top: 10px;
 }
 
+/* Emphasis for explanatory text */
+.explanation {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #d9534f;          /* attention‑grabbing red */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.explanation::before {
+  content: "❄️➡️🌊";
+  font-size: 1.4rem;
+}
+
+/* Larger, bolder container */
+.impact-card {
+  max-width: 720px;
+  margin: 1.5rem auto;
+  padding: 1.25rem 1.5rem;
+  border: 3px solid #0072ff;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+  text-align: left;          /* easier reading */
+}
+
+/* Headline line */
+.impact-headline {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #d9534f;            /* vivid red for attention */
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.headline-note {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #4a4a4a;
+}
+
+/* Body text (impacts) */
+.impact-body {
+  font-size: 1.15rem;
+  line-height: 1.45;
+  margin-bottom: 0.75rem;
+}
+
+/* Footnote / context */
+.impact-footnote {
+  font-size: 0.95rem;
+  color: #555;
+}

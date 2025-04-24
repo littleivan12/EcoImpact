@@ -30,18 +30,34 @@ function ImpactInfo({ value }) {
   if (value === 0) {
     text = "No additional sea‑level rise.";
   } else if (value === 1) {
-    text = `≈ ${cm} cm / ${inc} in higher: occasional “nuisance” flooding at king tides.  (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
+    text = `≈ ${cm} cm / ${inc} in higher: <strong className="impact-highlight">nuisance flooding&nbsp;(a.k.a. high‑tide flooding—streets & basements inundated during the year’s highest “king tides”)</strong> at coastal hot‑spots becomes common. (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
   } else if (value <= 3) {
-    text = `≈ ${cm} cm / ${inc} in higher: low‑lying farmland and salt‑marshes start to drown; coastal defences need upgrades.  (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
+    text = `≈ ${cm} cm / ${inc} in higher: <strong className="impact-highlight">low‑lying farmland and salt‑marshes start to drown</strong>; coastal defences need upgrades. (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
   } else if (value <= 6) {
-    text = `≈ ${cm} cm / ${inc} in higher: tens of millions worldwide face yearly flood risk; some island nations consider relocating.  (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
+    text = `≈ ${cm} cm / ${inc} in higher: <strong className="impact-highlight">tens of millions worldwide face yearly flood risk</strong>; some island nations consider relocating. (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
   } else if (value <= 8) {
-    text = `≈ ${cm} cm / ${inc} in higher: big coastal cities spend hundreds of billions on sea‑walls or managed retreat.  (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
+    text = `≈ ${cm} cm / ${inc} in higher: <strong className="impact-highlight">big coastal cities spend <u>hundreds of billions</u> on sea‑walls or managed retreat</strong>. (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
   } else {
-    text = `≈ ${cm} cm / ${inc} in higher (~1 m / 3 ft): large coastal ecosystems lost; adaptation costs soar above \$100 B per year.  (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
+    text = `≈ ${cm} cm / ${inc} in higher (~1 m / 3 ft): <strong className="impact-highlight">large coastal ecosystems lost; adaptation costs soar above <u>$100 B per year</u></strong>. (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
   }
 
-  return <p className="impact-info">{text}</p>;
+  return (
+    <div className="impact-card">
+      {/* headline metric */}
+      <p className="impact-headline">
+        {cm}&nbsp;cm&nbsp;/&nbsp;{inc}&nbsp;in
+        <span className="headline-note"> SEA-LEVEL RISE</span>
+      </p>
+  
+      {/* descriptive impacts */}
+      <p className="impact-body" dangerouslySetInnerHTML={{ __html: text }}></p>
+  
+      {/* footnote / ice-mass context */}
+      <p className="impact-footnote">
+        🧊 Ice melted so far: {gtIce.toLocaleString()} Gt &nbsp;|&nbsp; ≈ {greenlandPct}% of Greenland’s ice sheet
+      </p>
+    </div>
+  );
 }
 
 function IceSheets() {
@@ -55,7 +71,7 @@ function IceSheets() {
       <TopBar hex1="#4ebeee" hex2="#140b8d" />
       <div className="ice-sheet-page">
         <BackButton pageType="water" />
-        <h1 className="page-title">EcoImpact</h1>
+        <h1 className="page-title">What happens if you melt the Greenland ice sheet?</h1>
 
         {/* Ice Sheet and Sea Level Visualization */}
         <div className="visualization-container">
