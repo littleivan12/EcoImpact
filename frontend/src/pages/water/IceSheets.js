@@ -18,21 +18,37 @@ function SeaLvlImage({ value }) {
 }
 
 function ImpactInfo({ value }) {
-  let impactText = "";
-  if (value >= 0 && value <= 2) {
-    impactText = "Minimal impact on sea levels. Coastal regions remain largely unaffected.";
-  } else if (value >= 3 && value <= 5) {
-    impactText = "Noticeable sea level rise leading to increased coastal erosion and higher risk of flooding in low-lying areas.";
-  } else if (value >= 6 && value <= 8) {
-    impactText = "Significant sea level rise causing displacement of coastal communities and loss of habitat for marine species.";
+  // Each tick = 10 cm (≈ 4 in) of global sea‑level rise.
+  const cm  = value * 10;
+  const inc = (cm / 2.54).toFixed(0);
+
+  const gtIce = value * 36000;                    // cumulative melt, gigatonnes
+  const greenlandPct = ((gtIce / 2600000) * 100).toFixed(1); // Greenland Ice Sheet ≈ 2 600 000 Gt
+
+  let text;
+
+  if (value === 0) {
+    text = "No additional sea‑level rise.";
+  } else if (value === 1) {
+    text = `≈ ${cm} cm / ${inc} in higher: occasional “nuisance” flooding at king tides.  (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
+  } else if (value <= 3) {
+    text = `≈ ${cm} cm / ${inc} in higher: low‑lying farmland and salt‑marshes start to drown; coastal defences need upgrades.  (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
+  } else if (value <= 6) {
+    text = `≈ ${cm} cm / ${inc} in higher: tens of millions worldwide face yearly flood risk; some island nations consider relocating.  (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
+  } else if (value <= 8) {
+    text = `≈ ${cm} cm / ${inc} in higher: big coastal cities spend hundreds of billions on sea‑walls or managed retreat.  (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
   } else {
-    impactText = "Severe sea level rise resulting in major disruptions to human settlements and ecosystems globally.";
+    text = `≈ ${cm} cm / ${inc} in higher (~1 m / 3 ft): large coastal ecosystems lost; adaptation costs soar above \$100 B per year.  (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
   }
-  return <p className="impact-info">{impactText}</p>;
+
+  return <p className="impact-info">{text}</p>;
 }
 
 function IceSheets() {
   const [meltedSheets, setMeltedSheets] = useState(0);
+
+  const cmRise   = meltedSheets * 10;               // global‑mean sea‑level change
+  const inchRise = (cmRise / 2.54).toFixed(1);      // convert to inches (~4 in per tick)
 
   return (
     <div>
@@ -55,11 +71,15 @@ function IceSheets() {
                 type="range"
                 min="0"
                 max="10"
+                step="1"
                 value={meltedSheets}
                 onChange={(e) => setMeltedSheets(parseInt(e.target.value))}
                 className="slider"
               />
-              <span className="slider-label">{meltedSheets} Ice Sheets Melted</span>
+              <br />
+              <span className="slider-label">
+                Sea‑level rise: {cmRise}&nbsp;cm&nbsp;(~{inchRise}&nbsp;in) | Ice melted: {(meltedSheets * 36000).toLocaleString()} Gt
+              </span>
             </div>
           </div>
 
