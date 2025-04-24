@@ -60,7 +60,7 @@ function StickAround() {
         {/* Selection Controls */}
         <div className="selection-container">
           <h2 className="selection-title">
-            Choose an Item to Litter in Ancient Rome
+            Choose an Item to Litter in Ancient Rome, year 1
           </h2>
 
           <div className="material-buttons">
