@@ -7,8 +7,42 @@ import _ from 'lodash';
 import BackButton from "../../components/BackButton.js";
 import TopBar from "../../components/TopBar.js";
 import Footer from "../../components/Footer.js";
+import AirEffects from "../../components/AirEffects.js";
+
+function EffectNames({value, thresholds}){
+  /* Modify threshold values for words here */
+  const [effectWords, setEffectWords] = useState([]);
+  
+  useEffect(() => {
+    let newWords = [];
+
+    if (value > thresholds[0]) newWords.push("Heavy Haze");
+    if (value > thresholds[1]) newWords.push("Acid Rain");
+    if (value > thresholds[2]) newWords.push("Plant Death");
+    if (value > thresholds[3]) newWords.push("Animal Death");
+
+    setEffectWords(newWords);
+
+  }, [value]);
+
+  return (
+    <div className="effect-container">
+      {effectWords.map((word, index) => (
+        <div
+          key={index}
+          className={`effect-word ${effectWords.includes(word) ? 'show' : ''}`}
+        >
+          {word}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 const AirDataMap = () => {
+  /* Change Environment Impact thresholds here */
+  const limitArr = [15000, 30000, 45000, 50000];
+
   // State Management
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,8 +60,7 @@ const AirDataMap = () => {
 
   // Line Graph for Country Data Rendering Function
   function renderGraph(data) {
-    const width = 500, height = 300, margin = { top: 30, right: 30, bottom: 30, left: 50 };
-
+    const width = 500, height = 300, margin = { top: 0, right: 0, bottom: 0, left: 0 };
 
     const svg = d3.select("#co2-graph")
         .attr("width", width)
@@ -231,13 +264,10 @@ const AirDataMap = () => {
     };
   }, [data, removedCountries]);
   
-  
-  
 // Toggle between map and country view
 const handleViewToggle = () => {
   setViewMode(viewMode === "map" ? "country" : "map");
 };
-
 
 const resetMap = () => {
   setRemovedCountries(new Set()); // Reset the removed countries state
@@ -268,9 +298,6 @@ const resetMap = () => {
 
     setTotalEmissions(GLOBAL_CO2_TOTAL);
 };
-
-
-
 
 const renderProgressBar = () => {
   // Calculate the percentage of emissions based on the current total emissions
@@ -335,47 +362,58 @@ const updateEmissionsOnSelection = (countryEmissions) => {
   });
 };
 
-
   // HTML PORTION 
   return (
-    <div className="container">
+    <div>
       <TopBar hex1="#f6e36a" hex2="#97840c"/>
-      <h1 className="title">CO₂ Emissions Map</h1>
+      <div className="container">
+        <BackButton pageType="air"/>
+        <h1 className="title">CO₂ Emissions Map</h1>
 
-      <button onClick={handleViewToggle}>
-        {viewMode === "map" ? "Country Data" : "Toggle Map"}
-      </button>
-
-      <button onClick={resetMap}>
-        RESET MAP
-      </button>
-
-      {/*  View */}
-<div id="map" className={viewMode === "map" ? "map-container" : "map-container" }></div>
-{/* Country View */}
-{selectedCountry && viewMode === "country" && (
-  <div className="info-box">
-  <button className="close-btn" onClick={() => setSelectedCountry(null)}>✖</button>
-  <h2>{selectedCountry.country}</h2>
-  <p><strong>Total Emissions:</strong> {selectedCountry.total} million metric tons</p>
-  <p><strong>Coal:</strong> {selectedCountry.coal}</p>
-  <p><strong>Oil:</strong> {selectedCountry.oil}</p>
-  <p><strong>Gas:</strong> {selectedCountry.gas}</p>
-  <p><strong>Cement:</strong> {selectedCountry.cement}</p>
-  <p><strong>Flaring:</strong> {selectedCountry.flaring}</p>
-  <p><strong>Per Capita:</strong> {selectedCountry.per_capita}</p>
-  <h2>Total CO₂ Emissions History</h2>
-  <svg id="co2-graph"></svg>
-</div>
-)}
-
-      {selectedCountry && viewMode === "map" && (
-        <div className="info-box2">
+        {/*  View */}
+        <div id="map" className={viewMode === "map" ? "map-container" : "map-container" }></div>
+        {/* Country View */}
+        {selectedCountry && viewMode === "country" && (
+        <div className="info-box">
+          <button className="close-btn" onClick={() => setSelectedCountry(null)}>✖</button>
           <h2>{selectedCountry.country}</h2>
-          {/* Emissions Bar in Country View */}
-          {viewMode === "map" && renderProgressBar()}
+          <p><strong>Total Emissions:</strong> {selectedCountry.total} million metric tons</p>
+          <p><strong>Coal:</strong> {selectedCountry.coal}</p>
+          <p><strong>Oil:</strong> {selectedCountry.oil}</p>
+          <p><strong>Gas:</strong> {selectedCountry.gas}</p>
+          <p><strong>Cement:</strong> {selectedCountry.cement}</p>
+          <p><strong>Flaring:</strong> {selectedCountry.flaring}</p>
+          <p><strong>Per Capita:</strong> {selectedCountry.per_capita}</p>
+          <h2>Total CO₂ Emissions History</h2>
+          <svg id="co2-graph"></svg>
         </div>
-      )}
+        )}
+
+        {selectedCountry && viewMode === "map" && (
+          <div className="info-box2">
+            <h2>{selectedCountry.country}</h2>
+            {/* Emissions Bar in Country View */}
+            {viewMode === "map" && renderProgressBar()}
+          </div>
+        )}
+
+        <button onClick={handleViewToggle} className="map-buttons">
+          {viewMode === "map" ? "Country Data" : "Toggle Map"}
+        </button>
+
+        <button onClick={resetMap} className="map-buttons">
+          RESET MAP
+        </button>
+
+        <div className="effects-container">
+          <h2 className="title">Long-Term Effects</h2>
+          <div className="effects">
+            <AirEffects value={totalEmissions} set={limitArr}/>
+          </div>
+          <EffectNames value={totalEmissions} thresholds={limitArr}/>
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 };

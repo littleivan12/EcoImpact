@@ -1,9 +1,47 @@
 /* General Styles */
-body {
-  font-family: 'Arial', sans-serif;
+body, html {
+  font-family: 'Lucida Sans', sans-serif;
   margin: 0;
   padding: 0;
+  width: 100%;
+  height: 100%;
   background-color: #f0f0f0;
+}
+
+/* Title */
+.title{
+  text-align: center;
+  font-size: 50px;
+}
+
+.title h2{
+  text-align: center;
+  font-size: 25px;
+}
+
+/* Map Buttons */
+.map-buttons{
+  width: 100px;
+  height: 40px;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  justify-content: left;
+  align-items: left;
+  background-color: #bababa;
+  border-radius: 5px;
+  position: relative;
+  transition: background 0.3s;
+}
+
+/* Last Button */
+.map-buttons:last-child{
+  margin-right: 0;
+}
+
+/* Map Buttons Hover */
+.map-buttons:hover{
+  background-color: #dfdfdf;
 }
 
 /* Map Page Container */
@@ -19,6 +57,7 @@ body {
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .map-subtitle {
@@ -38,18 +77,20 @@ body {
 
 /* Map Section */
 .map-container {
-  position:absolute;
+  position: relative;
   max-width: 100%;
+  height: auto;
   overflow-y: auto;
+  overflow-x: hidden;
   transform: scale();
-
 }
 
 .world-map {
-  width: 800%;
+  width: 100%;
   max-width: 500px;
   border: 2px solid #333;
   border-radius: 10px;
+  overflow-x: auto;
 }
 
 /* Country Buttons */
@@ -83,20 +124,50 @@ body {
 
 /* Environmental Effects - Positioned to the Right of the Map */
 .effects-container {
-  width: 300px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
   text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 30px;
+  font-weight: bold;
 }
 
-.effects-placeholder {
-  width: 100%;
-  height: 200px;
-  background-color: #ccc;
+.effects {
+  width: 600px;
+  height: 250px;
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
   color: #333;
+  background-color: #ccc;
   border-radius: 10px;
+}
+
+/* The names of each effect appear */
+.effect-word {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  margin-bottom: 10px;
+}
+
+.effect-word.show {
+  opacity: 1;
+}
+
+.effect-word:nth-child(1) {
+  transition-delay: 0s;
+}
+.effect-word:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.effect-word:nth-child(3) {
+  transition-delay: 0.2s;
 }
 
 /* CO2 Bar */
@@ -170,17 +241,16 @@ body {
 }
 
 .info-box2 {
-  position: absolute;
-  top: 32%;
-  right: 20px;
-  width: 300px;  /* Increase width */
+  position: relative;
+  padding: 1rem;
+  margin: 1rem;
+  max-width: 600px;  /* Increase width */
   height: auto; /* Set a fixed height or use min-height */
   background: rgba(255, 255, 255, 0.9);
-  padding: 20px;  /* Adjust padding if needed */
   border-radius: 10px;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
-  z-index: 100;
+  z-index: 10;
   transition: all 0.3s ease-in-out;
   overflow-y: auto; /* Add scrollbar when content exceeds height */
 }
@@ -189,19 +259,29 @@ body {
   font-size: 28px;
   color: #333;
   margin-bottom: 10px;
-  
 }
 
 .info-box p {
-  font-size: 14px;
-  margin: 5px 0;
-  color: #555;
-  overflow-y: auto; 
+  position: absolute;
+  top: 32%;
+  right: 20px;
+  width: 400px;
+  height: 700px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  transition: all 0.3s ease-in-out;
+  overflow-y: auto;
 }
 
 #co2-graph {
   width: 100%;
-  height: 80%;
+  height: 250px;
+  display: block;
+  margin-top: 1rem;
 }
 
 @media (max-width: 768px) {
@@ -211,6 +291,7 @@ body {
     top: 10%;
   }
 }
+
 .close-btn {
   position: absolute;
   top: 5px;
@@ -225,31 +306,27 @@ body {
 .close-btn:hover {
   color: red;
 }
+
 #map {
   width: 100%;
   height: 100vh;  /* 100% of the viewport height */
 }
 
-
-
-body, html {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden; 
-  /* Prevents scrolling if it's not needed */
-}
-
 .container {
   width: 100%;
   height: 100%;
+  /*padding: 2rem;*/
+  position: relative;
+  align-items: center;
+  text-align: center;
 }
 
 svg {
  /* Ensures that the SVG doesn't have extra margins */
   width: 100%;
   height: 100%;
+  scale: 75%;
+  display: block;
 }
 
 #mapWrapper {
