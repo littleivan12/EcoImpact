@@ -66,24 +66,18 @@ body, html {
   margin-bottom: 2rem;
 }
 
-/* Map & Impact Container - Places them side by side */
-.map-impact-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3rem;
-  margin-bottom: 2rem;
-}
+
 
 /* Map Section */
 .map-container {
-  position: relative;
-  max-width: 100%;
-  height: auto;
-  overflow-y: auto;
-  overflow-x: hidden;
-  transform: scale();
+  position: absolute; /* or relative, depending on parent */
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* hides any overflow */
+  top: 0;
+  left: 0;
 }
+
 
 .world-map {
   width: 100%;
@@ -91,6 +85,7 @@ body, html {
   border: 2px solid #333;
   border-radius: 10px;
   overflow-x: auto;
+
 }
 
 /* Country Buttons */
@@ -112,15 +107,7 @@ body, html {
   transition: background 0.3s;
 }
 
-.selected {
-  background-color: #a74a28;
-  color: white;
-}
 
-.deselected {
-  background-color: #dc3545;
-  color: white;
-}
 
 /* Environmental Effects - Positioned to the Right of the Map */
 .effects-container {
@@ -245,44 +232,62 @@ body, html {
   padding: 1rem;
   margin: 1rem;
   max-width: 600px;  /* Increase width */
-  height: auto; /* Set a fixed height or use min-height */
-  background: rgba(255, 255, 255, 0.9);
+  max-height: auto ;
+  background: rgba(255, 2515, 255, 0.9);
   border-radius: 10px;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   z-index: 10;
   transition: all 0.3s ease-in-out;
   overflow-y: auto; /* Add scrollbar when content exceeds height */
+
 }
 
-.info-box h2 {
-  font-size: 28px;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.info-box p {
-  position: absolute;
-  top: 32%;
-  right: 20px;
-  width: 400px;
-  height: 700px;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 20px;
+.info-box1 {
+  position: relative;
+  padding: 1rem;
+  margin: 1rem;
+  max-width: 600px;  /* Increase width */
+  max-height: 200px ;
+  background: rgba(255, 2515, 255, 0.9);
   border-radius: 10px;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
-  z-index: 100;
+  z-index: 10;
   transition: all 0.3s ease-in-out;
-  overflow-y: auto;
+  overflow-y: auto; /* Add scrollbar when content exceeds height */
+
 }
+
+.info-box p {
+  position: relative;
+  padding: 1rem;
+  margin: 1rem;
+  max-width: 600px;  /* Increase width */
+  max-height: 200px;
+  background: rgba(255, 2515, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  transition: all 0.3s ease-in-out;
+  overflow-y: auto; /* Add scrollbar when content exceeds height */
+
+}
+
 
 #co2-graph {
   width: 100%;
-  height: 250px;
+  height: 300px; /* increased height for better visibility */
   display: block;
   margin-top: 1rem;
+  background-color: #fffbe6; /* light background for contrast */
+  border: 2px solid #e0c200; /* subtle border to define space */
+  border-radius: 12px; /* rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* soft shadow for depth */
+  padding: 0.5rem;
 }
+
 
 @media (max-width: 768px) {
   .info-box {
@@ -309,23 +314,16 @@ body, html {
 
 #map {
   width: 100%;
-  height: 100vh;  /* 100% of the viewport height */
+  height: 100%;  /* 100% of the viewport height */
 }
 
-.container {
-  width: 100%;
-  height: 100%;
-  /*padding: 2rem;*/
-  position: relative;
-  align-items: center;
-  text-align: center;
-}
+
 
 svg {
  /* Ensures that the SVG doesn't have extra margins */
-  width: 100%;
-  height: 100%;
-  scale: 75%;
+ width: 100vw;
+  height: 80vw;
+  scale: 100%;
   display: block;
 }
 
@@ -333,4 +331,72 @@ svg {
   position: relative;
   width: 100%;
   height: 100vh; /* Full viewport height */
+  border: 2px dashed red;
+
+}
+
+#legend {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+
+
+#legend-container {
+  margin-top: 10px;
+  margin-left: 5px;
+  z-index: 1000;
+}
+
+.main-layout {
+  display: flex;
+  height: calc(100vh - 80px); /* Adjust for TopBar/Footer if needed */
+}
+
+.map-section {
+  flex: 3;
+  position: relative;
+
+}
+
+.map-container {
+  width: 100%;
+  height: 80vh;
+  background-color: rgba(0, 128, 255, 0.2); /* Light blue overlay */
+  border: 2px dashed red;
+  overflow:calc();
+  
+  
+}
+
+.sidebar {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-left: 1px solid #ccc;
+}
+
+.info-box, .info-box2, .effects-container {
+  margin-bottom: 1.5rem;
+}
+
+.map-buttons {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  width: 100%;
+}
+.tooltip {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  max-width: 250px;
+  word-wrap: break-word;
+  pointer-events: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
