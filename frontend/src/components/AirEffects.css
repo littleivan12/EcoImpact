@@ -17,7 +17,7 @@
 }
 
 .img-container img{
-    width: 250px;
+    width: 200px;
     height: auto;
     object-fit: contain;
     position: relative;

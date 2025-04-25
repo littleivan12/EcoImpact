@@ -120,7 +120,7 @@ function EffectNames({ value, thresholds }) {
 
 const AirDataMap = () => {
   /* Change Environment Impact thresholds here */
-  const limitArr = [15000, 30000, 45000, 50000];
+  const limitArr = [9280, 18561, 27842, 35000];
 
   // State Management
   const [data, setData] = useState([]);
