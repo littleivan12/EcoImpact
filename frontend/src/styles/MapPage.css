@@ -19,47 +19,47 @@ body, html {
   font-size: 25px;
 }
 
-.map-buttons {
-  width: auto;
-  padding: 6px 12px;
-  font-size: 12px;
-  height: 30px;
-  margin-right: 8px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  background-color: #bababa;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.3s;
-}
-
-.map-buttons:hover {
-  background-color: #a0a0a0;
-  transform: scale(1.05);
-}
-
-.map-buttons:active {
-  transform: scale(0.95);
-}
-
-
-
 .button-container {
   display: flex;
-  gap: 10px; /* Adds space between the buttons */
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
 }
 
-
-/* Last Button */
-.map-buttons:last-child{
-  margin-right: 0;
+.map-buttons {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s, box-shadow 0.3s, background-color 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Map Buttons Hover */
-.map-buttons:hover{
-  background-color: #dfdfdf;
+/* Toggle Button */
+.toggle-button {
+  background-color: #4caf50; /* green */
 }
+.toggle-button:hover {
+  background-color: #43a047;
+}
+
+/* Reset Button */
+.reset-button {
+  background-color: #f44336; /* red */
+}
+.reset-button:hover {
+  background-color: #e53935;
+}
+
+/* Active/Pressed */
+.map-buttons:active {
+  transform: scale(0.96);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
 
 /* Map Page Container */
 .map-page-container {
@@ -141,8 +141,8 @@ body, html {
 }
 
 .effects {
-  width: 600px;
-  height: 250px;
+  width: 300px;
+  height: 200px;
   display: flex;
   position: relative;
   align-items: center;
@@ -280,7 +280,7 @@ body, html {
 
 
 #co2-graph {
-  width: 100%;
+  width: 90%;
   height: 300px; /* increased height for better visibility */
   display: block;
   margin-top: 1rem;
@@ -427,4 +427,61 @@ svg {
   border-radius: 10px;
   margin-top: 1rem;
   font-weight: 700; /* Add this line */
+}
+
+#legend {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+#legend svg {
+  display: block;
+  margin: 0 auto;
+}
+.centered-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.heading-main {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2d3748; /* gray-800 */
+  margin-top: 1rem;
+}
+
+.heading-mode {
+  font-size: 2rem;
+  font-weight: 800;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 1rem;
+  display: inline-block;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.map-mode {
+  background-color: #fef2f2; /* red-100 */
+  color: #b91c1c;            /* red-700 */
+  border: 1px solid #f87171; /* red-400 */
+}
+
+.country-mode {
+  background-color: #ecfdf5; /* green-100 */
+  color: #047857;            /* green-700 */
+  border: 1px solid #34d399; /* green-400 */
+}
+
+
+.reset-announcement {
+  margin-top: 16px;
+  padding: 10px 20px;
+  background-color: #e0f7fa;
+  border: 1px solid #26c6da;
+  color: #006064;
+  font-weight: bold;
+  border-radius: 6px;
+  text-align: center;
+  transition: opacity 0.3s ease;
 }

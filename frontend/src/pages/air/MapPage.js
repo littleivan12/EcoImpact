@@ -130,6 +130,8 @@ const AirDataMap = () => {
   const [totalEmissions, setTotalEmissions] = useState(37123.850352);
   const [viewMode, setViewMode] = useState("map"); // "map" or "country"
   const [removedCountries, setRemovedCountries] = useState(new Set());
+  const [resetMessage, setResetMessage] = useState(false);
+
 
   const svgRef = useRef(null);
   const countryDataMapRef = useRef({});
@@ -263,6 +265,56 @@ const AirDataMap = () => {
           const colorScale = d3.scaleThreshold()
             .domain([100, 500, 1000, 5000, 10000])
             .range(["#ffffb2", "#fecc5c", "#fd8d3c", "#f03b20", "#bd0026"]);
+          const legendWidth = 300;
+const legendHeight = 50;
+
+const legendSvg = d3
+  .select("#legend")
+  .append("svg")
+  .attr("width", legendWidth)
+  .attr("height", legendHeight);
+
+// Create a linear gradient
+const defs = legendSvg.append("defs");
+
+const linearGradient = defs
+  .append("linearGradient")
+  .attr("id", "legend-gradient");
+
+linearGradient
+  .selectAll("stop")
+  .data([
+    { offset: "0%", color: "#ffffcc" },
+    { offset: "50%", color: "#fd8d3c" },
+    { offset: "100%", color: "#800026" },
+  ])
+  .enter()
+  .append("stop")
+  .attr("offset", d => d.offset)
+  .attr("stop-color", d => d.color);
+
+// Draw the gradient rectangle
+legendSvg
+  .append("rect")
+  .attr("x", 0)
+  .attr("y", 10)
+  .attr("width", legendWidth)
+  .attr("height", 20)
+  .style("fill", "url(#legend-gradient)");
+
+// Add a scale (optional — depending on your data range)
+const xScale = d3.scaleLinear()
+  .domain([0, 1000]) // Adjust based on your emission values
+  .range([0, legendWidth]);
+
+const xAxis = d3.axisBottom(xScale)
+  .ticks(5)
+  .tickFormat(d => `${d} Mt`);
+
+legendSvg.append("g")
+  .attr("transform", "translate(0, 30)")
+  .call(xAxis);
+
   
           const getCountryFill = (countryCode) => {
             const countryData = countryDataMap[countryCode];
@@ -375,8 +427,7 @@ const AirDataMap = () => {
         })
         .catch(error => console.error("Error loading world map:", error));
     };
-  
-    drawLegend();
+
     drawMap();
   
     const debounceDrawMap = _.debounce(drawMap, 200);
@@ -424,7 +475,12 @@ const AirDataMap = () => {
         return getCountryFill(code);
       });
 
+      setResetMessage(true);
+      setTimeout(() => setResetMessage(false), 3000); // Hide after 3 second
+
     setTotalEmissions(GLOBAL_CO2_TOTAL);
+    
+
   };
 
   const renderProgressBar = () => {
@@ -513,31 +569,31 @@ return (
     {/* Main Content Area */}
     <div className="main-content text-center">
       <BackButton pageType="air" />
-      <h1 className="text-2xl font-bold mt-4 text-gray-800">
-        CHOOSE A MODE TO EXPLORE THE WORLD MAP DATA
-      </h1>
+      <div className="centered-container">
+  <h1 className="heading-main">
+    CHOOSE A MODE TO EXPLORE THE WORLD MAP DATA
+  </h1>
 
-      <h1
-        className={`text-3xl font-extrabold mt-4 p-3 rounded-xl transition duration-300 inline-block ${
-          viewMode === "map"
-            ? "bg-green-100 text-green-700 border border-green-400 shadow-lg"
-            : "bg-red-100 text-red-700 border border-red-400 shadow-lg"
-        }`}
-      >
-        {viewMode === "country" ? "🌍 Country CO₂ Data" : "🗑 Remove a Country"}
-      </h1>
+  <h1 className={`heading-mode ${viewMode === "map" ? "map-mode" : "country-mode"}`}>
+    {viewMode === "country" ? "🌍 Country CO₂ Data" : "🗑 Remove a Country"}
+  </h1>
+</div>
+{resetMessage && (
+        <div className="reset-announcement">
+          ✅ Map has been reset!
+        </div>
+      )}
 
-      <div className="button-container mt-4">
-        <button onClick={handleViewToggle} className="map-buttons">
-          {viewMode === "map" ? "Country CO2 Data" : "Remove A Country!"}
-        </button>
-        {viewMode === "map" && (
-          <button onClick={resetMap} className="map-buttons">
-            RESET MAP
-          </button>
-        )}
-      </div>
-
+<div className="button-container">
+  <button onClick={handleViewToggle} className="map-buttons toggle-button">
+    {viewMode === "map" ? "🌍 Country CO₂ Data" : "🗑 Remove A Country!"}
+  </button>
+  {viewMode === "map" && (
+    <button onClick={resetMap} className="map-buttons reset-button">
+      ♻️ RESET MAP
+    </button>
+  )}
+</div>
       <div className="main-layout">
         {/* Map Section */}
         <div className="map-section">
@@ -551,12 +607,12 @@ return (
           {selectedCountry && viewMode === "country" && (
             <div>
               <h2>{selectedCountry.country}: {selectedCountry.Year}</h2>
-              <p><strong>Total Emissions: </strong> {selectedCountry.total} million metric tons</p>
-              <p><strong>Coal:</strong> {selectedCountry.coal}</p>
-              <p><strong>Oil:</strong> {selectedCountry.oil}</p>
-              <p><strong>Gas:</strong> {selectedCountry.gas}</p>
-              <p><strong>Cement:</strong> {selectedCountry.cement}</p>
-              <p><strong>Flaring:</strong> {selectedCountry.flaring}</p>
+              <p><strong>🌎Total Emissions:{selectedCountry.Year} </strong> {selectedCountry.total} million metric tons</p>
+              <p><strong>🪨Coal:</strong> {selectedCountry.coal}</p>
+              <p><strong>🛢️Oil:</strong> {selectedCountry.oil}</p>
+              <p><strong>⛽️Gas:</strong> {selectedCountry.gas}</p>
+              <p><strong>🏗️Cement:</strong> {selectedCountry.cement}</p>
+              <p><strong>🔥Flaring:</strong> {selectedCountry.flaring}</p>
               <p><strong>Per Capita:</strong> {selectedCountry.per_capita}</p>
               <h2>Total CO₂ Emissions History</h2>
               <svg id="co2-graph"></svg>
@@ -565,7 +621,7 @@ return (
 
           {selectedCountry && viewMode === "map" && (
             <div>
-              <h2>{selectedCountry.country}</h2>
+              <h2>{selectedCountry.country}: {selectedCountry.Year}</h2>
               <div className="progress-wrapper">
                 {renderProgressBar()}
               </div>
@@ -581,8 +637,9 @@ return (
 
           {/* Default Message When No Country Selected */}
           {!selectedCountry && (
-  <div className="sidebar-placeholder font-semibold">
-    <p>👈 Click on a country on the map to view its CO₂ data!</p>
+      <div className="sidebar-placeholder font-semibold">
+    <p>👈 Click on a country on the map to view its impact!</p>
+
   </div>
 )}
         </div>
