@@ -128,7 +128,7 @@ const AirDataMap = () => {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [co2History, setCo2History] = useState([]);
   const [totalEmissions, setTotalEmissions] = useState(37123.850352);
-  const [viewMode, setViewMode] = useState("country"); // "map" or "country"
+  const [viewMode, setViewMode] = useState("map"); // "map" or "country"
   const [removedCountries, setRemovedCountries] = useState(new Set());
 
   const svgRef = useRef(null);
@@ -140,40 +140,40 @@ const AirDataMap = () => {
   // Line Graph for Country Data Rendering Function
   function renderGraph(data) {
     const width = 300, height = 300, margin = { top: 20, right: 20, bottom: 50, left: 60 };
-  
+
     const svg = d3.select("#co2-graph")
       .attr("width", width)
       .attr("height", height);
-  
+
     svg.selectAll("*").remove(); // Clear previous content
-  
+
     const xScale = d3.scaleLinear()
       .domain(d3.extent(data, d => d.Year))
       .range([margin.left, width - margin.right]);
-  
+
     const yScale = d3.scaleLinear()
       .domain([0, d3.max(data, d => d.total)])
       .range([height - margin.bottom, margin.top]);
-  
-      const yearExtent = d3.extent(data, d => d.Year);
-const startYear = Math.ceil(yearExtent[0] / 30) * 30;
-const endYear = yearExtent[1];
-const tickYears = d3.range(startYear, endYear + 1, 30);
 
-const xAxis = d3.axisBottom(xScale)
-  .tickValues(tickYears)
-  .tickFormat(d3.format("d"));
+    const yearExtent = d3.extent(data, d => d.Year);
+    const startYear = Math.ceil(yearExtent[0] / 30) * 30;
+    const endYear = yearExtent[1];
+    const tickYears = d3.range(startYear, endYear + 1, 30);
+
+    const xAxis = d3.axisBottom(xScale)
+      .tickValues(tickYears)
+      .tickFormat(d3.format("d"));
     const yAxis = d3.axisLeft(yScale);
-  
+
     // Axes
     svg.append("g")
       .attr("transform", `translate(0,${height - margin.bottom})`)
       .call(xAxis);
-  
+
     svg.append("g")
       .attr("transform", `translate(${margin.left},0)`)
       .call(yAxis);
-  
+
     // Axis Labels
     svg.append("text")
       .attr("x", width / 2)
@@ -181,7 +181,7 @@ const xAxis = d3.axisBottom(xScale)
       .attr("text-anchor", "middle")
       .attr("font-size", "12px")
       .text("Year");
-  
+
     svg.append("text")
       .attr("transform", "rotate(-90)")
       .attr("x", -height / 2)
@@ -189,13 +189,13 @@ const xAxis = d3.axisBottom(xScale)
       .attr("text-anchor", "middle")
       .attr("font-size", "12px")
       .text("Total CO₂ Emissions");
-  
+
     // Line rendering
     const line = d3.line()
       .x(d => xScale(d.Year))
       .y(d => yScale(d.total))
       .curve(d3.curveMonotoneX);
-  
+
     svg.append("path")
       .datum(data)
       .attr("fill", "none")
@@ -203,11 +203,11 @@ const xAxis = d3.axisBottom(xScale)
       .attr("stroke-width", 2)
       .attr("d", line);
   }
-  
+
 
   useEffect(() => {
     console.time("dataFetch");
-
+  
     fetch("http://127.0.0.1:8000/air_super/")
       .then((response) => response.json())
       .then((data) => {
@@ -220,32 +220,32 @@ const xAxis = d3.axisBottom(xScale)
         console.timeEnd("dataFetch");
       });
   }, []);
-
+  
   useEffect(() => {
     if (data.length === 0) return;
-
+  
     const drawMap = () => {
       d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
         .then((world) => {
           const mapContainer = document.getElementById("map");
           const width = mapContainer.clientWidth || window.innerWidth;
           const height = mapContainer.clientHeight || window.innerHeight;
-
+  
           const projection = d3.geoNaturalEarth1()
             .scale(200)
             .translate([width / 2, height / 2]);
-
+  
           const pathGenerator = d3.geoPath().projection(projection);
-
-          d3.select("#map").selectAll("*").remove();
-
+  
+          d3.select("#map").selectAll("*").remove(); // Clear previous map
+  
           const svg = d3.select("#map")
             .append("svg")
             .attr("width", width)
             .attr("height", height)
             .style("background-color", "#87CEEB");
           svgRef.current = svg;
-
+  
           const graticule = d3.geoGraticule();
           svg.append("path")
             .datum(graticule())
@@ -253,25 +253,23 @@ const xAxis = d3.axisBottom(xScale)
             .attr("fill", "none")
             .attr("stroke", "#ffffff")
             .attr("stroke-opacity", 0.2);
-
+  
           const countryDataMap = data.reduce((acc, country) => {
             const formattedCode = String(country.number_code).padStart(3, "0");
             acc[formattedCode] = country;
             return acc;
           }, {});
-
+  
           const colorScale = d3.scaleThreshold()
             .domain([100, 500, 1000, 5000, 10000])
             .range(["#ffffb2", "#fecc5c", "#fd8d3c", "#f03b20", "#bd0026"]);
-
-
-          // === 🗺️ Map countries ===
+  
           const getCountryFill = (countryCode) => {
             const countryData = countryDataMap[countryCode];
             if (removedCountries.has(countryCode)) return "#ccc";
             return countryData ? colorScale(countryData.total) : "";
           };
-
+  
           const countries = svg.append("g")
             .selectAll("path")
             .data(topojson.feature(world, world.objects.countries).features)
@@ -288,19 +286,18 @@ const xAxis = d3.axisBottom(xScale)
               const countryCode = String(d.id).padStart(3, "0");
               const countryData = countryDataMap[countryCode];
               const countryName = countryData?.country || "Unknown";
-
+  
               d3.select(this)
                 .transition()
                 .duration(1000)
                 .attr("stroke-width", 1.5);
-              // Cancel any previous fade-out transition immediately
+  
               tooltip.interrupt();
               tooltip
                 .style("opacity", 1)
                 .html(`<div style="white-space: normal;"><strong>${countryName}</strong></div>`)
                 .style("left", `${event.pageX + 10}px`)
                 .style("top", `${event.pageY - 28}px`);
-
             })
             .on("mousemove", function (event) {
               tooltip
@@ -312,7 +309,7 @@ const xAxis = d3.axisBottom(xScale)
                 .transition()
                 .duration(500)
                 .attr("stroke-width", 0.5);
-
+  
               tooltip
                 .transition()
                 .duration(200)
@@ -321,10 +318,10 @@ const xAxis = d3.axisBottom(xScale)
             .on("click", (event, d) => {
               const countryCode = String(d.id).padStart(3, "0");
               const countryData = countryDataMap[countryCode];
-
+  
               if (viewMode === "country") {
                 setSelectedCountry(countryData || { country: "Unknown", total: 0 });
-
+  
                 if (countryData) {
                   fetch(`http://127.0.0.1:8000/air_super/${countryCode}/past_five_years`)
                     .then((response) => response.json())
@@ -337,17 +334,16 @@ const xAxis = d3.axisBottom(xScale)
                       renderGraph(lastFiveYears);
                     });
                 }
-
+  
                 d3.selectAll("path").attr("stroke-width", 0.5);
                 d3.select(event.currentTarget)
                   .transition()
                   .duration(300)
                   .attr("stroke-width", 2);
-
+  
                 return;
               }
-
-              
+  
               if (removedCountries.has(countryCode)) {
                 removedCountries.delete(countryCode);
                 updateEmissionsOnSelection(countryData?.total || 0, totalEmissions);
@@ -357,12 +353,12 @@ const xAxis = d3.axisBottom(xScale)
                 updateEmissionsOnDeselect(countryData?.total || 0, totalEmissions);
                 setRemovedCountries((prev) => new Set(prev).add(countryCode));
               }
-
+  
               d3.select(event.currentTarget)
                 .transition()
                 .duration(300)
                 .attr("fill", getCountryFill(countryCode));
-
+  
               if (countryData) {
                 fetch(`http://127.0.0.1:8000/air_super/${countryCode}/past_five_years`)
                   .then((response) => response.json())
@@ -375,32 +371,32 @@ const xAxis = d3.axisBottom(xScale)
                     renderGraph(lastFiveYears);
                   });
               }
-
             });
         })
-
-
         .catch(error => console.error("Error loading world map:", error));
-
     };
-
-    drawMap();
+  
     drawLegend();
-
-
+    drawMap();
+  
     const debounceDrawMap = _.debounce(drawMap, 200);
     window.addEventListener("resize", debounceDrawMap);
-
+  
     return () => {
       window.removeEventListener("resize", debounceDrawMap);
     };
-  }, [data, removedCountries]);
-
-  // Toggle between map and country view
+  }, [data, removedCountries, viewMode]); // 🔥 added `viewMode` dependency!
+  
+  // ⬇️ Modified the toggle function to RESET everything
   const handleViewToggle = () => {
-    setViewMode(viewMode === "map" ? "country" : "map");
+    setSelectedCountry(null);
+    setRemovedCountries(new Set());
+    setCo2History([]);
+    setViewMode((prev) => (prev === "map" ? "country" : "map"));
   };
+  
 
+  // RESET MAP WHEN THE BUTTONS ARE SET.
   const resetMap = () => {
     setRemovedCountries(new Set()); // Reset the removed countries state
 
@@ -418,7 +414,6 @@ const xAxis = d3.axisBottom(xScale)
       if (removedCountries.has(countryCode)) return "#ccc";
       const countryData = countryDataMap[countryCode];
       return countryData ? colorScale(countryData.total) : "#87CEEB";
-      // or a default
     };
 
     svgRef.current.selectAll("path")
@@ -471,7 +466,7 @@ const xAxis = d3.axisBottom(xScale)
       .text(`${percentage}%`);
 
     return (
-      <div className="progress-container">
+      <div >
         <p><strong>Initial Global CO₂ Emissions:</strong> {GLOBAL_CO2_TOTAL.toLocaleString()} million metric tons</p>
         <p><strong>Current CO₂ Emissions:</strong> {totalEmissions.toLocaleString()} million metric tons</p>
         <svg id="progress-bar"></svg>
@@ -495,76 +490,110 @@ const xAxis = d3.axisBottom(xScale)
     });
   };
 
+  const [justDeselected, setJustDeselected] = useState(false);
+
+const handleCountryClick = (country) => {
+  if (selectedCountry?.country === country.country) {
+    setSelectedCountry(null);
+    setJustDeselected(true);
+  } else {
+    setSelectedCountry(country);
+    setJustDeselected(false);
+  }
+};
+
+
   // HTML PORTION 
-  return (
-    <div className="page-layout">
-      {/* Header */}
-      <TopBar hex1="#f6e36a" hex2="#97840c" />
+// HTML PORTION 
+return (
+  <div className="page-layout">
+    {/* Header */}
+    <TopBar hex1="#f6e36a" hex2="#97840c" />
 
-      {/* Main Content Area */}
-      <div className="main-content">
-        <BackButton pageType="air" />
+    {/* Main Content Area */}
+    <div className="main-content text-center">
+      <BackButton pageType="air" />
+      <h1 className="text-2xl font-bold mt-4 text-gray-800">
+        CHOOSE A MODE TO EXPLORE THE WORLD MAP DATA
+      </h1>
 
+      <h1
+        className={`text-3xl font-extrabold mt-4 p-3 rounded-xl transition duration-300 inline-block ${
+          viewMode === "map"
+            ? "bg-green-100 text-green-700 border border-green-400 shadow-lg"
+            : "bg-red-100 text-red-700 border border-red-400 shadow-lg"
+        }`}
+      >
+        {viewMode === "country" ? "🌍 Country CO₂ Data" : "🗑 Remove a Country"}
+      </h1>
 
-        <div className="main-layout">
-          {/* Map Section */}
-          {/* Map Section */}
-<div className="map-section">
-  <div id="map" className="map-container">
-    <div id="legend" className="legend"></div>
-  </div>
-</div>
-
-
-          {/* Sidebar Section */}
-          <div className="sidebar">
-            {selectedCountry && viewMode === "country" && (
-              <div className="info-box2">
-                {/* <button className="close-btn" onClick={() => setSelectedCountry(null)}>✖</button> */}
-                <h2>{selectedCountry.country}</h2>
-                <p><strong>Total Emissions:</strong> {selectedCountry.total} million metric tons</p>
-                <p><strong>Coal:</strong> {selectedCountry.coal}</p>
-                <p><strong>Oil:</strong> {selectedCountry.oil}</p>
-                <p><strong>Gas:</strong> {selectedCountry.gas}</p>
-                <p><strong>Cement:</strong> {selectedCountry.cement}</p>
-                <p><strong>Flaring:</strong> {selectedCountry.flaring}</p>
-                <p><strong>Per Capita:</strong> {selectedCountry.per_capita}</p>
-                <h2>Total CO₂ Emissions History</h2>
-                <svg id="co2-graph"></svg>
-              </div>
-            )}
-
-
-            {selectedCountry && viewMode === "map" && (
-              <div className="info-box1">
-                <h2>{selectedCountry.country}</h2>
-                {renderProgressBar()}
-              </div>
-            )}
-
-            <button onClick={handleViewToggle} className="map-buttons">
-              {viewMode === "map" ? "Country Data" : "Toggle Map"}
-            </button>
-
-            <button onClick={resetMap} className="map-buttons">
-              RESET MAP
-            </button>
-
-            <div className="effects-container">
-              <h2 className="title">Long-Term Effects</h2>
-              <div className="effects">
-                <AirEffects value={totalEmissions} set={limitArr} />
-              </div>
-              <EffectNames value={totalEmissions} thresholds={limitArr} />
-            </div>
-          </div>
-        </div>
+      <div className="button-container mt-4">
+        <button onClick={handleViewToggle} className="map-buttons">
+          {viewMode === "map" ? "Country CO2 Data" : "Remove A Country!"}
+        </button>
+        {viewMode === "map" && (
+          <button onClick={resetMap} className="map-buttons">
+            RESET MAP
+          </button>
+        )}
       </div>
 
-      {/* Footer */}
-      <Footer />
+      <div className="main-layout">
+        {/* Map Section */}
+        <div className="map-section">
+          <div id="map" className="map-container">
+            <div id="legend" className="legend"></div>
+          </div>
+        </div>
+
+        {/* Sidebar Section */}
+        <div className="sidebar">
+          {selectedCountry && viewMode === "country" && (
+            <div>
+              <h2>{selectedCountry.country}: {selectedCountry.Year}</h2>
+              <p><strong>Total Emissions: </strong> {selectedCountry.total} million metric tons</p>
+              <p><strong>Coal:</strong> {selectedCountry.coal}</p>
+              <p><strong>Oil:</strong> {selectedCountry.oil}</p>
+              <p><strong>Gas:</strong> {selectedCountry.gas}</p>
+              <p><strong>Cement:</strong> {selectedCountry.cement}</p>
+              <p><strong>Flaring:</strong> {selectedCountry.flaring}</p>
+              <p><strong>Per Capita:</strong> {selectedCountry.per_capita}</p>
+              <h2>Total CO₂ Emissions History</h2>
+              <svg id="co2-graph"></svg>
+            </div>
+          )}
+
+          {selectedCountry && viewMode === "map" && (
+            <div>
+              <h2>{selectedCountry.country}</h2>
+              <div className="progress-wrapper">
+                {renderProgressBar()}
+              </div>
+              <div className="effects-container">
+                <h2 className="title">Long-Term Effects</h2>
+                <div className="effects">
+                  <AirEffects value={totalEmissions} set={limitArr} />
+                </div>
+                <EffectNames value={totalEmissions} thresholds={limitArr} />
+              </div>
+            </div>
+          )}
+
+          {/* Default Message When No Country Selected */}
+          {!selectedCountry && (
+  <div className="sidebar-placeholder font-semibold">
+    <p>👈 Click on a country on the map to view its CO₂ data!</p>
+  </div>
+)}
+        </div>
+      </div>
     </div>
-  );
+
+    {/* Footer */}
+    <Footer />
+  </div>
+);
+
 
 };
 

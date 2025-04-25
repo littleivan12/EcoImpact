@@ -19,20 +19,37 @@ body, html {
   font-size: 25px;
 }
 
-/* Map Buttons */
-.map-buttons{
-  width: 100px;
-  height: 40px;
-  margin-right: 10px;
+.map-buttons {
+  width: auto;
+  padding: 6px 12px;
+  font-size: 12px;
+  height: 30px;
+  margin-right: 8px;
   margin-top: 5px;
   margin-bottom: 5px;
-  justify-content: left;
-  align-items: left;
   background-color: #bababa;
+  border: none;
   border-radius: 5px;
-  position: relative;
-  transition: background 0.3s;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s;
 }
+
+.map-buttons:hover {
+  background-color: #a0a0a0;
+  transform: scale(1.05);
+}
+
+.map-buttons:active {
+  transform: scale(0.95);
+}
+
+
+
+.button-container {
+  display: flex;
+  gap: 10px; /* Adds space between the buttons */
+}
+
 
 /* Last Button */
 .map-buttons:last-child{
@@ -159,7 +176,7 @@ body, html {
 
 /* CO2 Bar */
 .co2-container {
-  margin-top: 2rem;
+  margin-top: 21rem;
 }
 
 .co2-bar {
@@ -211,21 +228,7 @@ body, html {
 .home-icon:hover {
   background-color: #555; /* Slightly lighter on hover */
 }
-.info-box {
-  position: absolute;
-  top: 32%;
-  right: 20px;
-  width: 400px;  /* Increase width */
-  height: 700px\\; /* Set a fixed height or use min-height */
-  background: rgba(255, 255, 255, 0.9);
-  padding: 20px;  /* Adjust padding if needed */
-  border-radius: 10px;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-  z-index: 100;
-  transition: all 0.3s ease-in-out;
-  overflow-y: auto; /* Add scrollbar when content exceeds height */
-}
+
 
 .info-box2 {
   position: relative;
@@ -238,7 +241,7 @@ body, html {
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   z-index: 10;
-  transition: all 0.3s ease-in-out;
+ 
   overflow-y: auto; /* Add scrollbar when content exceeds height */
 
 }
@@ -254,7 +257,7 @@ body, html {
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   z-index: 10;
-  transition: all 0.3s ease-in-out;
+
   overflow-y: auto; /* Add scrollbar when content exceeds height */
 
 }
@@ -321,8 +324,7 @@ body, html {
 
 svg {
  /* Ensures that the SVG doesn't have extra margins */
- width: 100vw;
-  height: 80vw;
+  width: 100vw;
   scale: 100%;
   display: block;
 }
@@ -331,7 +333,7 @@ svg {
   position: relative;
   width: 100%;
   height: 100vh; /* Full viewport height */
-  border: 2px dashed red;
+
 
 }
 
@@ -344,7 +346,7 @@ svg {
 
 
 
-#legend-container {
+.legend-container {
   margin-top: 10px;
   margin-left: 5px;
   z-index: 1000;
@@ -365,7 +367,6 @@ svg {
   width: 100%;
   height: 80vh;
   background-color: rgba(0, 128, 255, 0.2); /* Light blue overlay */
-  border: 2px dashed red;
   overflow:calc();
   
   
@@ -399,4 +400,31 @@ svg {
   word-wrap: break-word;
   pointer-events: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+.progress-container {
+  margin: 0;
+  padding: 0;
+}
+
+.progress-container p {
+  margin: 0; /* Remove default spacing of <p> */
+}
+
+#progress-bar {
+  display: block;      /* Prevent baseline weirdness */
+  margin-top: 8px;     /* Optional: control space between text and bar */
+}
+.progress-wrapper {
+  margin-bottom: 16px; /* Add controlled spacing below the bar */
+}
+
+.sidebar-placeholder {
+  padding: 2rem;
+  font-size: 2rem;
+  color: #e61818;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  margin-top: 1rem;
+  font-weight: 700; /* Add this line */
 }
