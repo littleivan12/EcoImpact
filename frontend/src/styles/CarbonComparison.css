@@ -96,43 +96,11 @@ select {
   position: relative;
   width: 100px;
   height: 100px;
-  animation: chomping 0.5s ease-in-out infinite, movePacman 1s ease forwards;
-  clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+  
+  
 }
 
-@keyframes chomping {
-  0%, 100% {
-    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
-  }
-  50% {
-    clip-path: circle(50%);
-  }
-}
 
-/* Pac-Man moves left toward the user */
-.pacman-move {
-  animation: chomping 0.5s ease-in-out infinite, movePacman 1s ease forwards;
-}
-
-@keyframes movePacman {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-130px); /* Adjust based on spacing */
-  }
-}
-
-/* Stop chomping after move */
-.pacman-stop {
-  animation: none;
-  clip-path: circle(50%);
-}
-
-.pacman-attack {
-  transition: transform 2s ease, opacity 1s ease;
-  opacity: 0;
-}
 
 .reset-button {
   margin-top: 1.5rem;
