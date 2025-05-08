@@ -30,15 +30,15 @@ function ImpactInfo({ value }) {
   if (value === 0) {
     text = "No additional sea‑level rise.";
   } else if (value === 1) {
-    text = `≈ ${cm} cm / ${inc} in higher: <strong className="impact-highlight">nuisance flooding&nbsp;(a.k.a. high‑tide flooding—streets & basements inundated during the year’s highest “king tides”)</strong> at coastal hot‑spots becomes common. (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
+    text = `≈ ${cm} cm / ${inc} in higher: <strong className="impact-highlight">❗️ nuisance flooding&nbsp;(a.k.a. high‑tide flooding—streets & basements inundated during the year’s highest “king tides”)</strong> at coastal hot‑spots becomes common. (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
   } else if (value <= 3) {
-    text = `≈ ${cm} cm / ${inc} in higher: <strong className="impact-highlight">low‑lying farmland and salt‑marshes start to drown</strong>; coastal defences need upgrades. (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
+    text = `≈ ${cm} cm / ${inc} in higher: <strong className="impact-highlight">❗️❗️ low‑lying farmland and salt‑marshes start to drown</strong>; coastal defences need upgrades. (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
   } else if (value <= 6) {
-    text = `≈ ${cm} cm / ${inc} in higher: <strong className="impact-highlight">tens of millions worldwide face yearly flood risk</strong>; some island nations consider relocating. (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
+    text = `≈ ${cm} cm / ${inc} in higher: <strong className="impact-highlight">❗️❗️❗️ tens of millions worldwide face yearly flood risk</strong>; some island nations consider relocating. (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
   } else if (value <= 8) {
-    text = `≈ ${cm} cm / ${inc} in higher: <strong className="impact-highlight">big coastal cities spend <u>hundreds of billions</u> on sea‑walls or managed retreat</strong>. (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
+    text = `≈ ${cm} cm / ${inc} in higher: <strong className="impact-highlight">❗️❗️❗️❗️ big coastal cities spend <u>hundreds of billions</u> on sea‑walls or managed retreat</strong>. (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
   } else {
-    text = `≈ ${cm} cm / ${inc} in higher (~1 m / 3 ft): <strong className="impact-highlight">large coastal ecosystems lost; adaptation costs soar above <u>$100 B per year</u></strong>. (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
+    text = `≈ ${cm} cm / ${inc} in higher (~1 m / 3 ft): <strong className="❗️❗️❗️❗️ impact-highlight">❗️❗️❗️❗️❗️ large coastal ecosystems lost; adaptation costs soar above <u>$100 B per year</u></strong>. (Total ice melted so far: ${gtIce.toLocaleString()} Gt ≈ ${greenlandPct}% of Greenland’s ice mass)`;
   }
 
   return (
