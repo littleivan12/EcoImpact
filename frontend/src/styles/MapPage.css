@@ -19,30 +19,47 @@ body, html {
   font-size: 25px;
 }
 
-/* Map Buttons */
-.map-buttons{
-  width: 100px;
-  height: 40px;
-  margin-right: 10px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  justify-content: left;
-  align-items: left;
-  background-color: #bababa;
-  border-radius: 5px;
-  position: relative;
-  transition: background 0.3s;
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
 }
 
-/* Last Button */
-.map-buttons:last-child{
-  margin-right: 0;
+.map-buttons {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s, box-shadow 0.3s, background-color 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Map Buttons Hover */
-.map-buttons:hover{
-  background-color: #dfdfdf;
+/* Toggle Button */
+.toggle-button {
+  background-color: #4caf50; /* green */
 }
+.toggle-button:hover {
+  background-color: #43a047;
+}
+
+/* Reset Button */
+.reset-button {
+  background-color: #f44336; /* red */
+}
+.reset-button:hover {
+  background-color: #e53935;
+}
+
+/* Active/Pressed */
+.map-buttons:active {
+  transform: scale(0.96);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
 
 /* Map Page Container */
 .map-page-container {
@@ -66,24 +83,18 @@ body, html {
   margin-bottom: 2rem;
 }
 
-/* Map & Impact Container - Places them side by side */
-.map-impact-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3rem;
-  margin-bottom: 2rem;
-}
+
 
 /* Map Section */
 .map-container {
-  position: relative;
-  max-width: 100%;
-  height: auto;
-  overflow-y: auto;
-  overflow-x: hidden;
-  transform: scale();
+  position: absolute; /* or relative, depending on parent */
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* hides any overflow */
+  top: 0;
+  left: 0;
 }
+
 
 .world-map {
   width: 100%;
@@ -91,6 +102,7 @@ body, html {
   border: 2px solid #333;
   border-radius: 10px;
   overflow-x: auto;
+
 }
 
 /* Country Buttons */
@@ -112,15 +124,7 @@ body, html {
   transition: background 0.3s;
 }
 
-.selected {
-  background-color: #a74a28;
-  color: white;
-}
 
-.deselected {
-  background-color: #dc3545;
-  color: white;
-}
 
 /* Environmental Effects - Positioned to the Right of the Map */
 .effects-container {
@@ -137,8 +141,8 @@ body, html {
 }
 
 .effects {
-  width: 600px;
-  height: 250px;
+  width: 300px;
+  height: 200px;
   display: flex;
   position: relative;
   align-items: center;
@@ -172,7 +176,7 @@ body, html {
 
 /* CO2 Bar */
 .co2-container {
-  margin-top: 2rem;
+  margin-top: 21rem;
 }
 
 .co2-bar {
@@ -224,65 +228,69 @@ body, html {
 .home-icon:hover {
   background-color: #555; /* Slightly lighter on hover */
 }
-.info-box {
-  position: absolute;
-  top: 32%;
-  right: 20px;
-  width: 400px;  /* Increase width */
-  height: 700px\\; /* Set a fixed height or use min-height */
-  background: rgba(255, 255, 255, 0.9);
-  padding: 20px;  /* Adjust padding if needed */
-  border-radius: 10px;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-  z-index: 100;
-  transition: all 0.3s ease-in-out;
-  overflow-y: auto; /* Add scrollbar when content exceeds height */
-}
+
 
 .info-box2 {
   position: relative;
   padding: 1rem;
   margin: 1rem;
   max-width: 600px;  /* Increase width */
-  height: auto; /* Set a fixed height or use min-height */
-  background: rgba(255, 255, 255, 0.9);
+  max-height: auto ;
+  background: rgba(255, 2515, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+ 
+  overflow-y: auto; /* Add scrollbar when content exceeds height */
+
+}
+
+.info-box1 {
+  position: relative;
+  padding: 1rem;
+  margin: 1rem;
+  max-width: 600px;  /* Increase width */
+  max-height: 200px ;
+  background: rgba(255, 2515, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+
+  overflow-y: auto; /* Add scrollbar when content exceeds height */
+
+}
+
+.info-box p {
+  position: relative;
+  padding: 1rem;
+  margin: 1rem;
+  max-width: 600px;  /* Increase width */
+  max-height: 200px;
+  background: rgba(255, 2515, 255, 0.9);
   border-radius: 10px;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   z-index: 10;
   transition: all 0.3s ease-in-out;
   overflow-y: auto; /* Add scrollbar when content exceeds height */
+
 }
 
-.info-box h2 {
-  font-size: 28px;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.info-box p {
-  position: absolute;
-  top: 32%;
-  right: 20px;
-  width: 400px;
-  height: 700px;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-  z-index: 100;
-  transition: all 0.3s ease-in-out;
-  overflow-y: auto;
-}
 
 #co2-graph {
-  width: 100%;
-  height: 250px;
+  width: 90%;
+  height: 300px; /* increased height for better visibility */
   display: block;
   margin-top: 1rem;
+  background-color: #fffbe6; /* light background for contrast */
+  border: 2px solid #e0c200; /* subtle border to define space */
+  border-radius: 12px; /* rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* soft shadow for depth */
+  padding: 0.5rem;
 }
+
 
 @media (max-width: 768px) {
   .info-box {
@@ -309,23 +317,15 @@ body, html {
 
 #map {
   width: 100%;
-  height: 100vh;  /* 100% of the viewport height */
+  height: 100%;  /* 100% of the viewport height */
 }
 
-.container {
-  width: 100%;
-  height: 100%;
-  /*padding: 2rem;*/
-  position: relative;
-  align-items: center;
-  text-align: center;
-}
+
 
 svg {
  /* Ensures that the SVG doesn't have extra margins */
-  width: 100%;
-  height: 100%;
-  scale: 75%;
+  width: 100vw;
+  scale: 100%;
   display: block;
 }
 
@@ -333,4 +333,155 @@ svg {
   position: relative;
   width: 100%;
   height: 100vh; /* Full viewport height */
+
+
+}
+
+#legend {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+
+
+.legend-container {
+  margin-top: 10px;
+  margin-left: 5px;
+  z-index: 1000;
+}
+
+.main-layout {
+  display: flex;
+  height: calc(100vh - 80px); /* Adjust for TopBar/Footer if needed */
+}
+
+.map-section {
+  flex: 3;
+  position: relative;
+
+}
+
+.map-container {
+  width: 100%;
+  height: 80vh;
+  background-color: rgba(0, 128, 255, 0.2); /* Light blue overlay */
+  overflow:calc();
+  
+  
+}
+
+.sidebar {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-left: 1px solid #ccc;
+}
+
+.info-box, .info-box2, .effects-container {
+  margin-bottom: 1.5rem;
+}
+
+.map-buttons {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  width: 100%;
+}
+.tooltip {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  max-width: 250px;
+  word-wrap: break-word;
+  pointer-events: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+.progress-container {
+  margin: 0;
+  padding: 0;
+}
+
+.progress-container p {
+  margin: 0; /* Remove default spacing of <p> */
+}
+
+#progress-bar {
+  display: block;      /* Prevent baseline weirdness */
+  margin-top: 8px;     /* Optional: control space between text and bar */
+}
+.progress-wrapper {
+  margin-bottom: 16px; /* Add controlled spacing below the bar */
+}
+
+.sidebar-placeholder {
+  padding: 2rem;
+  font-size: 2rem;
+  color: #e61818;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  margin-top: 1rem;
+  font-weight: 700; /* Add this line */
+}
+
+#legend {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+#legend svg {
+  display: block;
+  margin: 0 auto;
+}
+.centered-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.heading-main {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2d3748; /* gray-800 */
+  margin-top: 1rem;
+}
+
+.heading-mode {
+  font-size: 2rem;
+  font-weight: 800;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 1rem;
+  display: inline-block;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.map-mode {
+  background-color: #fef2f2; /* red-100 */
+  color: #b91c1c;            /* red-700 */
+  border: 1px solid #f87171; /* red-400 */
+}
+
+.country-mode {
+  background-color: #ecfdf5; /* green-100 */
+  color: #047857;            /* green-700 */
+  border: 1px solid #34d399; /* green-400 */
+}
+
+
+.reset-announcement {
+  margin-top: 16px;
+  padding: 10px 20px;
+  background-color: #e0f7fa;
+  border: 1px solid #26c6da;
+  color: #006064;
+  font-weight: bold;
+  border-radius: 6px;
+  text-align: center;
+  transition: opacity 0.3s ease;
 }

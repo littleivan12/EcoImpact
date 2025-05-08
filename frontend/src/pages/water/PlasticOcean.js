@@ -36,6 +36,9 @@ function PlasticOcean() {
   if (projections.length === 0) return <p>Loading ocean data...</p>;
 
   const { year, coverage, impact } = projections[step];
+  const coveragePercent = (coverage * 100).toFixed(3); // "0.442"
+  const coverageAreaKm2 = (coverage * 361_900_000).toLocaleString();
+  const overlayHeight = Math.min(100, coverage * 2000);
 
   const handleClick = () => {
     if (step < projections.length - 1) {
@@ -66,16 +69,16 @@ function PlasticOcean() {
     <div>
       <TopBar hex1="#4ebeee" hex2="#140b8d" />
       <div
-      className="plastic-ocean-page"
-      style={{
-        backgroundColor: countryImpact
-          ? getRiskColor(countryImpact.coastal_waste_risk)
-          : "#e0f7fa",
-      }}
+        className="plastic-ocean-page"
+        style={{
+          backgroundColor: countryImpact
+            ? getRiskColor(countryImpact.coastal_waste_risk)
+            : "#e0f7fa",
+        }}
       >
         <BackButton pageType="water" />
 
-        <h1 className="page-title">Plastic in the Ocean</h1>
+        <h1 className="page-title">A Plastic Ocean</h1>
 
         <p className="explanation">
           Litter to see how plastic waste accumulates globally in the ocean over
@@ -124,8 +127,9 @@ function PlasticOcean() {
         )}
 
         <p className="description">
-          By <strong>{year}</strong>, an estimated <strong>{coverage}%</strong> of
-          the ocean may be covered in plastic.
+          By <strong>{year}</strong>, plastic spread could blanket&nbsp;
+          <strong>{coveragePercent}%</strong> of the ocean (
+          <em>{coverageAreaKm2}&nbsp;km²</em>).
         </p>
 
         {/* Visual Representation */}
@@ -133,7 +137,7 @@ function PlasticOcean() {
           <div className="ocean">
             <div
               className="plastic-overlay"
-              style={{ height: `${coverage * 10}%` }}
+              style={{ height: `${overlayHeight}%` }}
             ></div>
 
             {/* Fish flee with more plastic */}
@@ -171,7 +175,6 @@ function PlasticOcean() {
       </div>
       <Footer />
     </div>
-    
   );
 }
 
