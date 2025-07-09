@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 .ds_store
 *.DS_Store
+.env
