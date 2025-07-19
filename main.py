@@ -6,6 +6,9 @@ from sqlalchemy import text
 from fastapi.middleware.cors import CORSMiddleware
 
 from database import SessionLocal, engine
+from dotenv import load_dotenv
+load_dotenv()
+
 import models
 
 # Create database tables
