@@ -5,11 +5,11 @@ from pydantic import BaseModel
 from sqlalchemy import text
 from fastapi.middleware.cors import CORSMiddleware
 
-from database import SessionLocal, engine
+from backend.database import SessionLocal, engine
 from dotenv import load_dotenv
 load_dotenv()
 
-import models
+import backend.models as models
 
 # Create database tables
 models.Base.metadata.create_all(bind=engine)

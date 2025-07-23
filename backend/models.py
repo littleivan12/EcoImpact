@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Float
-from database import Base
+from backend.database import Base
 
 class AirSuper(Base):
     __tablename__ = "air_super"
